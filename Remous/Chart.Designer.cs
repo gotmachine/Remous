@@ -50,7 +50,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             imageAnnotation1.AnchorAlignment = System.Drawing.ContentAlignment.TopCenter;
             imageAnnotation1.Height = 22D;
-            imageAnnotation1.Image = "C:\\Users\\Got\\source\\repos\\CornetEMVisu\\Resources\\inonde-logo-noir-small.png";
+            imageAnnotation1.Image = "C:\\Users\\Got\\source\\repos\\Remous\\Resources\\inonde-logo-noir-small.png";
             imageAnnotation1.IsSizeAlwaysRelative = false;
             imageAnnotation1.Name = "logo";
             imageAnnotation1.Width = 27D;
@@ -138,7 +138,7 @@
             stripLine5.Font = new System.Drawing.Font("Monospac821 BT", 9.75F, System.Drawing.FontStyle.Bold);
             stripLine5.ForeColor = System.Drawing.Color.Gold;
             stripLine5.IntervalOffset = 0.8D;
-            stripLine5.Text = "SBM-2015 : Exposition extrêment significative";
+            stripLine5.Text = "SBM-2015 : Exposition extrêmement significative";
             stripLine5.TextAlignment = System.Drawing.StringAlignment.Center;
             stripLine6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             stripLine6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
