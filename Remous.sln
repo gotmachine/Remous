@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CornetEMVisu", "CornetEMVisu\CornetEMVisu.csproj", "{6DEBA557-5D4F-4BAD-A731-93C0298EA27C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remous", "CornetEMVisu\Remous.csproj", "{6DEBA557-5D4F-4BAD-A731-93C0298EA27C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
