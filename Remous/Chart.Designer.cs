@@ -1,4 +1,4 @@
-﻿namespace CornetEMVisu
+﻿namespace Remous
 {
     partial class Chart
     {
@@ -47,15 +47,15 @@
             // 
             // chart1
             // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             imageAnnotation1.AnchorAlignment = System.Drawing.ContentAlignment.TopCenter;
-            imageAnnotation1.Height = 22D;
+            imageAnnotation1.Height = 11D;
             imageAnnotation1.Image = "C:\\Users\\Got\\source\\repos\\Remous\\Resources\\inonde-logo-noir-small.png";
             imageAnnotation1.IsSizeAlwaysRelative = false;
             imageAnnotation1.Name = "logo";
-            imageAnnotation1.Width = 27D;
+            imageAnnotation1.Width = 14D;
             imageAnnotation1.X = 8D;
             imageAnnotation1.Y = -1D;
             this.chart1.Annotations.Add(imageAnnotation1);
@@ -188,18 +188,24 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Color = System.Drawing.Color.DodgerBlue;
             series1.CustomProperties = "PointWidth=1";
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.LabelForeColor = System.Drawing.Color.White;
             series1.Legend = "Legend";
             series1.Name = "Series1";
             series1.ShadowColor = System.Drawing.Color.Empty;
+            series1.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.White;
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series2.BorderWidth = 5;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Color = System.Drawing.Color.YellowGreen;
             series2.CustomProperties = "PointWidth=1";
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series2.IsXValueIndexed = true;
+            series2.LabelForeColor = System.Drawing.Color.White;
             series2.Legend = "Legend";
             series2.Name = "Series2";
+            series2.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.White;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(800, 452);

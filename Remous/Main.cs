@@ -1,34 +1,97 @@
-﻿using CornetEMVisu;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System;
+using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
-namespace WindowsFormsApp1
+namespace Remous
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
-        static SerialPort comPort;
-        static bool isRecording = false;
-        static List<string> buffer = new List<string>();
-        static string tickData = string.Empty;
-        static bool test = false;
+        private bool m1TestingEnabled;
+        private bool m2TestingEnabled;
 
-        public Form1()
+        public mainForm()
         {
             InitializeComponent();
+
+            m1ComboBoxUnit.SelectedIndex = 0;
+            m2ComboBoxUnit.SelectedIndex = 0;
+            graphicModeComboBox.SelectedIndex = 0;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void mainForm_Load(object sender, EventArgs e)
         {
             SearchComPorts();
+
+            if (File.Exists("settings.xml"))
+            {
+                try
+                {
+                    XmlSerializer ser = new XmlSerializer(typeof(Settings));
+                    using (FileStream fs = File.OpenRead("settings.xml"))
+                    {
+                        Program.settings = (Settings)ser.Deserialize(fs);
+                    }
+                }
+                catch
+                {
+
+                }
+
+                SelectTextInCombo(m1ComboBoxCOM, Program.settings.M1COMPort);
+                m1TextBoxTitle.Text = Program.settings.M1Title;
+                SelectTextInCombo(m1ComboBoxUnit, Program.settings.M1Unit);
+
+                SelectTextInCombo(m2ComboBoxCOM, Program.settings.M2COMPort);
+                m2TextBoxTitle.Text = Program.settings.M2Title;
+                SelectTextInCombo(m2ComboBoxUnit, Program.settings.M2Unit);
+
+                try
+                {
+                    graphicIntervalNumericUpDown.Value = (decimal)Program.settings.GraphicInterval;
+                    graphicDurationNumericUpDown.Value = Program.settings.GraphicDuration;
+                    SelectTextInCombo(graphicModeComboBox, Program.settings.GraphicMode);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using (StreamWriter sw = new StreamWriter("settings.xml"))
+            {
+                Program.settings.M1COMPort = m1ComboBoxCOM.Text;
+                Program.settings.M1Title = m1TextBoxTitle.Text;
+                Program.settings.M1Unit = m1ComboBoxUnit.Text;
+
+                Program.settings.M2COMPort = m2ComboBoxCOM.Text;
+                Program.settings.M2Title = m2TextBoxTitle.Text;
+                Program.settings.M2Unit = m2ComboBoxUnit.Text;
+
+                Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
+                Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
+                Program.settings.GraphicMode = graphicModeComboBox.Text;
+
+                XmlSerializer ser = new XmlSerializer(typeof(Settings));
+                ser.Serialize(sw, Program.settings);
+            }
+        }
+
+        private void SelectTextInCombo(ComboBox combo, string textToSelect)
+        {
+            for (int i = 0; i < combo.Items.Count; i++)
+            {
+                string item = (string)combo.Items[i];
+                if (item == textToSelect)
+                {
+                    combo.SelectedIndex = i;
+                    continue;
+                }
+            }
         }
 
         private void btnSearchComPorts_Click(object sender, EventArgs e)
@@ -36,237 +99,88 @@ namespace WindowsFormsApp1
             SearchComPorts();
         }
 
-        private void BtnStart_Click(object sender, EventArgs e)
-        {
-            StopComPort();
-
-            if (isRecording)
-            {
-                isRecording = false;
-                BtnStart.Text = "Start";
-                comPort = null;
-                timer.Enabled = false;
-                return;
-            }
-
-            string portName;
-
-            if (comboBox1.SelectedItem != null)
-                portName = (string)comboBox1.SelectedItem;
-            else
-                portName = comboBox1.Text;
-
-            comPort = new SerialPort();
-            comPort.PortName = portName;
-            comPort.BaudRate = 9600;
-            comPort.Parity = Parity.None;
-            comPort.DataBits = 8;
-            comPort.StopBits = StopBits.One;
-            comPort.Handshake = Handshake.None;
-            comPort.ReadTimeout = 500;
-            comPort.WriteTimeout = 500;
-
-            if (!IsCornetFound(comPort))
-                return;
-
-            isRecording = true;
-            BtnStart.Text = "Stop";
-
-            
-            comPort.Open();
-            comPort.DataReceived += ComPortDataReceived;
-            timer.Enabled = true;
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            timer.Enabled = true;
-            test = true;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            timer.Enabled = false;
-            test = false;
-        }
-
         private void SearchComPorts()
         {
+            m1ComboBoxCOM.Items.Clear();
+            m2ComboBoxCOM.Items.Clear();
+
             string[] ports = SerialPort.GetPortNames();
 
             if (ports.Length == 0)
             {
                 MessageBox.Show("Aucun port COM trouvé");
+                m1ComboBoxCOM.Items.Add("Données de test m1");
+                m1ComboBoxCOM.Items.Add("Données de test m2");
+                m2ComboBoxCOM.Items.Add("Données de test m1");
+                m2ComboBoxCOM.Items.Add("Données de test m2");
                 return;
             }
 
-            comboBox1.Items.Clear();
-
-            foreach (string port in ports)
+            for (int i = 0; i < ports.Length; i++)
             {
-                comboBox1.Items.Add(port);
-            }
+                m1ComboBoxCOM.Items.Add(ports[i]);
+                m2ComboBoxCOM.Items.Add(ports[i]);
 
-            comboBox1.SelectedIndex = 0;
-            BtnStart.Enabled = true;
+                if (i == 0)
+                {
+                    m1ComboBoxCOM.SelectedIndex = 0;
+                    m2ComboBoxCOM.SelectedIndex = 0;
+                }
+
+                if (i == 1)
+                {
+                    m2ComboBoxCOM.SelectedIndex = 1;
+                }
+            }
         }
 
-        private static bool IsCornetFound(SerialPort comPort)
+
+
+        private void button5_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            try
-            {
-                comPort.Open();
-            }
-            catch
-            {
-                MessageBox.Show($"Erreur à l'ouverture du port {comPort.PortName}");
-                return false;
-            }
-            
-            while (stopwatch.Elapsed < TimeSpan.FromSeconds(10.0))
-            {
-                try
-                {
-                    if (comPort.ReadLine().Split(',')[0].Length > 0)
-                    {
-                        comPort.Close();
-                        return true;
-                    }
-                }
-                catch (TimeoutException)
-                {
-                }
-            }
-            comPort.Close();
-            MessageBox.Show($"Cornet non trouvé sur le port {comPort.PortName}");
-            return false;
+            StartChart(false);
         }
 
-        private static void StopComPort()
+        private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (comPort != null && comPort.IsOpen)
-                {
-                    comPort.DataReceived -= ComPortDataReceived;
-                    comPort.Close();
-                }
-            }
-            catch (Exception)
-            {
-
-            }
+            StartChart(true);
         }
 
-        private static void ComPortDataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void StartChart(bool fullscreen)
         {
-            try
+            if (m1TestingEnabled)
+                m1ButtonTest_Click(null, null);
+
+            if (m2TestingEnabled)
+                m2ButtonTest_Click(null, null);
+
+            Program.GraphicEnabled = true;
+
+            if (Program.m1Connection.Connect(m1ComboBoxCOM.Text))
+                Program.m1Connection.Enabled = true;
+
+            if (Program.m2Connection.Connect(m2ComboBoxCOM.Text, false))
+                Program.m2Connection.Enabled = true;
+
+            bool useCurve = graphicModeComboBox.Text == "Barres" ? false : true;
+
+            Chart chart = new Chart(fullscreen, useCurve, Program.m2Connection.Enabled);
+
+            if (fullscreen)
             {
-                lock (buffer)
-                {
-                    buffer.Add(comPort.ReadLine());
-                }
+                chart.AutoSize = true;
+                chart.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             }
-            catch
+
+            chart.Show();
+
+            if (fullscreen)
             {
-            }
-        }
-
-        private void TimerTick(object sender, EventArgs e)
-        {
-            if (test)
-            {
-                Random rnd = new Random();
-                buffer.Add($"{rnd.Next()},{rnd.Next()}\r");
-            }
-
-            if (buffer.Count == 0)
-            {
-                return;
-            }
-            lock (buffer)
-            {
-                foreach (string recvData in buffer)
-                {
-                    tickData += recvData;
-                }
-                buffer.Clear();
-            }
-            int start;
-            while (true)
-            {
-                if (tickData.IndexOf("\r") == -1)
-                {
-                    tickData = "";
-                    return;
-                }
-                start = 0;
-                int end = tickData.IndexOf("\r");
-                if (start != -1 || end != -1)
-                {
-                    if (start == -1)
-                    {
-
-                        ProcessDataLine(tickData);
-                        return;
-                    }
-                    if (end == -1)
-                    {
-                        break;
-                    }
-                    if (start < end)
-                    {
-                        tickData = tickData.Substring(start, end);
-                        ProcessDataLine(tickData);
-                    }
-                    continue;
-                }
-                return;
-            }
-            tickData = tickData.Substring(start);
-        }
-
-        private void ProcessDataLine(string line)
-        {
-            try
-            {
-                if (checkBox1.Checked)
-                {
-                    textOutput.AppendText("RAW DATA : '" + line + "'" + Environment.NewLine);
-                }
-
-
-                string[] array = line.Split(',');
-                double rf;
-                double rfFrequency;
-                if (array.Length == 2)
-                {
-                    rf = double.Parse(array[0].Trim());
-                    rfFrequency = double.Parse(array[1].Trim());
-                }
-                else
-                {
-                    rf = double.Parse(array[4].Trim());
-                    rfFrequency = double.Parse(array[7].Trim());
-                }
-
-                textOutput.AppendText("RF : " + rf.ToString("0.0000000 mW/m²") + " / " + Math.Pow(rf * 0.377, 0.5).ToString("0.0000000 V/m") + Environment.NewLine);
-
-                //foreach (DataPlotterBase plotter in Program.plotters)
-                //{
-                //    plotter.AddPoint(rf);
-                //}
-            }
-            catch
-            {
-
+                SetFullScreenForm(chart);
             }
         }
 
-        public void SetFullScreenForm(Form form)
+        private void SetFullScreenForm(Form form)
         {
             // This is required if the form reaches this code in maximized state
             // otherwise the TaskBar remains on top of the form
@@ -278,46 +192,128 @@ namespace WindowsFormsApp1
             form.BringToFront();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void graphicIntervalNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            SetChartParams();
-            Chart chart = new Chart();
-            chart.Show();
+            Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void graphicDurationNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            SetChartParams();
-            Chart chart = new Chart(true);
-            //Program.plotters.Add(plot.barPlot);
-            chart.AutoSize = true;
-            chart.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            chart.Show();
-            SetFullScreenForm(chart);
+            Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
         }
 
-        private void SetChartParams()
+        private void graphicModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBox1.Text, out int interval))
+            Program.settings.GraphicMode = graphicModeComboBox.Text;
+        }
+
+        private void m1TextBoxTitle_TextChanged(object sender, EventArgs e)
+        {
+            Program.settings.M1Title = m1TextBoxTitle.Text;
+        }
+
+        private void m2TextBoxTitle_TextChanged(object sender, EventArgs e)
+        {
+            Program.settings.M2Title = m2TextBoxTitle.Text;
+        }
+
+        private void m1ButtonTest_Click(object sender, EventArgs e)
+        {
+            if (m1TestingEnabled)
             {
-                textBox1.Text = "500";
-                interval = 500;
+                m1ButtonTest.Text = "Tester la connexion";
+                Program.m1Connection.Enabled = false;
+                if (!m2TestingEnabled)
+                {
+                    StopTesting();
+                }
+            }
+            else
+            {
+                if (!Program.m1Connection.Connect(m1ComboBoxCOM.Text))
+                    return;
+
+                m1ButtonTest.Text = "Test en cours...";
+                Program.m1Connection.Enabled = true;
+                if (!m2TestingEnabled)
+                {
+                    StartTesting();
+                }
             }
 
-            if (!int.TryParse(textBox2.Text, out int duration))
+            m1TestingEnabled = !m1TestingEnabled;
+        }
+
+        private void m2ButtonTest_Click(object sender, EventArgs e)
+        {
+            if (m2TestingEnabled)
             {
-                textBox2.Text = "60";
-                duration = 60;
+                m2ButtonTest.Text = "Tester la connexion";
+                Program.m2Connection.Enabled = false;
+                if (!m1TestingEnabled)
+                {
+                    StopTesting();
+                }
+            }
+            else
+            {
+                if (!Program.m2Connection.Connect(m2ComboBoxCOM.Text))
+                    return;
+
+                m2ButtonTest.Text = "Test en cours...";
+                Program.m2Connection.Enabled = true;
+                if (!m1TestingEnabled)
+                {
+                    StartTesting();
+                }
             }
 
-            Chart.chartInterval = interval;
-            Chart.duration = duration;
+            m2TestingEnabled = !m2TestingEnabled;
+        }
 
-            Chart.serie1Name = textBox3.Text;
-            Chart.serie2Name = textBox4.Text;
+        private void StopTesting()
+        {
+            Program.TestingEnabled = false;
+            Program.OnTimerTick -= OnTimerTick;
+        }
 
+        private void StartTesting()
+        {
+            Program.TestingEnabled = true;
+            Program.OnTimerTick += OnTimerTick;
+        }
 
+        private void OnTimerTick(double m1Power, double m1Frequency, double m2Power, double m2Frequency)
+        {
+            if (m1TestingEnabled)
+            {
+                if (Program.settings.M1Unit == "V/m")
+                    m1TextBoxPower.Text = m1Power.ToString("0.000 V/m");
+                else
+                    m1TextBoxPower.Text = m1Power.ToString("0.000000 mW/m²");
 
+                m1TextBoxFrequency.Text = m1Frequency.ToString("0.0 Mhz");
+            }
+
+            if (m2TestingEnabled)
+            {
+                if (Program.settings.M2Unit == "V/m")
+                    m2TextBoxPower.Text = m2Power.ToString("0.000 V/m");
+                else
+                    m2TextBoxPower.Text = m2Power.ToString("0.000000 mW/m²");
+
+                m2TextBoxFrequency.Text = m2Frequency.ToString("0.0 Mhz");
+            }
+        }
+
+        private void m1ComboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.settings.M1Unit = m1ComboBoxUnit.Text;
+        }
+
+        private void m2ComboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.settings.M2Unit = m2ComboBoxUnit.Text;
         }
     }
 }
