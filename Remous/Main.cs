@@ -24,12 +24,12 @@ namespace Remous
         {
             SearchComPorts();
 
-            if (File.Exists("settings.xml"))
+            if (File.Exists("RemousSettings.xml"))
             {
                 try
                 {
                     XmlSerializer ser = new XmlSerializer(typeof(Settings));
-                    using (FileStream fs = File.OpenRead("settings.xml"))
+                    using (FileStream fs = File.OpenRead("RemousSettings.xml"))
                     {
                         Program.settings = (Settings)ser.Deserialize(fs);
                     }
@@ -58,27 +58,33 @@ namespace Remous
 
                 }
             }
+
+            SetSettings();
         }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter("settings.xml"))
+            using (StreamWriter sw = new StreamWriter("RemousSettings.xml"))
             {
-                Program.settings.M1COMPort = m1ComboBoxCOM.Text;
-                Program.settings.M1Title = m1TextBoxTitle.Text;
-                Program.settings.M1Unit = m1ComboBoxUnit.Text;
-
-                Program.settings.M2COMPort = m2ComboBoxCOM.Text;
-                Program.settings.M2Title = m2TextBoxTitle.Text;
-                Program.settings.M2Unit = m2ComboBoxUnit.Text;
-
-                Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
-                Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
-                Program.settings.GraphicMode = graphicModeComboBox.Text;
-
+                SetSettings();
                 XmlSerializer ser = new XmlSerializer(typeof(Settings));
                 ser.Serialize(sw, Program.settings);
             }
+        }
+
+        private void SetSettings()
+        {
+            Program.settings.M1COMPort = m1ComboBoxCOM.Text;
+            Program.settings.M1Title = m1TextBoxTitle.Text;
+            Program.settings.M1Unit = m1ComboBoxUnit.Text;
+
+            Program.settings.M2COMPort = m2ComboBoxCOM.Text;
+            Program.settings.M2Title = m2TextBoxTitle.Text;
+            Program.settings.M2Unit = m2ComboBoxUnit.Text;
+
+            Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
+            Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
+            Program.settings.GraphicMode = graphicModeComboBox.Text;
         }
 
         private void SelectTextInCombo(ComboBox combo, string textToSelect)
