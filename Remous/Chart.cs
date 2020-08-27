@@ -15,6 +15,8 @@ namespace CornetEMVisu
     {
         public static int chartInterval = 500;
         public static int duration = 60;
+        public static string serie1Name = "série 1";
+        public static string serie2Name = "série 2";
 
 
         DataPointCollection serie1;
@@ -26,8 +28,14 @@ namespace CornetEMVisu
         {
             
             InitializeComponent();
+
             chart1.ChartAreas[0].AxisX.ScaleView.Size = duration * 2;
 
+            serie1 = chart1.Series["Series1"].Points;
+            serie2 = chart1.Series["Series2"].Points;
+
+            chart1.Series["Series1"].LegendText = serie1Name;
+            chart1.Series["Series2"].LegendText = serie2Name;
 
 
             //chart1.Annotations["logo"]
@@ -48,8 +56,7 @@ namespace CornetEMVisu
             R = new Random();
             Timer.Start();
 
-            serie1 = chart1.Series["Series1"].Points;
-            serie2 = chart1.Series["Series2"].Points;
+
 
             //chart1.Series["Series1"].Color = Color.FromArgb(50, Color.Red);
             //chart1.Series["Series2"].Color = Color.FromArgb(50, Color.Blue);
@@ -117,11 +124,57 @@ namespace CornetEMVisu
 
             }
 
-            //chart1.ChartAreas[0].AxisY.Minimum = double.NaN; // sets the Minimum to NaN
-            //chart1.ChartAreas[0].AxisY.Maximum = double.NaN; // sets the Minimum to NaN
-            chart1.ChartAreas[0].AxisY2.Minimum = double.NaN; // sets the Minimum to NaN
+            chart1.ChartAreas[0].AxisY2.Minimum = 0.0; // sets the Minimum to NaN
             chart1.ChartAreas[0].AxisY2.Maximum = double.NaN; // sets the Minimum to NaN
             chart1.ChartAreas[0].RecalculateAxesScale(); // recalculates the Maximum and Minimum values, since they are set to NaN
+            chart1.ChartAreas[0].AxisY.Minimum = 0.0; // sets the Minimum to NaN
+            chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY2.Maximum; // sets the Minimum to NaN
+
+            if (chart1.ChartAreas[0].AxisY.Maximum > 0.75)
+            {
+                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = chart1.ChartAreas[0].AxisY.Maximum;
+            }
+            else
+            {
+                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = 10.0;
+            }
+
+
+            if (chart1.ChartAreas[0].AxisY2.Maximum < 0.5)
+            {
+                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.02;
+                chart1.ChartAreas[0].AxisY2.Interval = 0.02;
+                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.02;
+                chart1.ChartAreas[0].AxisY.Interval = 0.02;
+            }
+            else if (chart1.ChartAreas[0].AxisY2.Maximum < 1.0)
+            {
+                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.05;
+                chart1.ChartAreas[0].AxisY2.Interval = 0.05;
+                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.05;
+                chart1.ChartAreas[0].AxisY.Interval = 0.05;
+            }
+            else if (chart1.ChartAreas[0].AxisY2.Maximum < 2.0)
+            {
+                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.1;
+                chart1.ChartAreas[0].AxisY2.Interval = 0.1;
+                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.1;
+                chart1.ChartAreas[0].AxisY.Interval = 0.1;
+            }
+            else if (chart1.ChartAreas[0].AxisY2.Maximum < 5.0)
+            {
+                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.2;
+                chart1.ChartAreas[0].AxisY2.Interval = 0.2;
+                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.2;
+                chart1.ChartAreas[0].AxisY.Interval = 0.2;
+            }
+            else
+            {
+                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.5;
+                chart1.ChartAreas[0].AxisY2.Interval = 0.5;
+                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.5;
+                chart1.ChartAreas[0].AxisY.Interval = 0.5;
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

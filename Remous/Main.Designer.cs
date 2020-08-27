@@ -43,6 +43,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnStart
@@ -73,7 +77,7 @@
             this.textOutput.Name = "textOutput";
             this.textOutput.ReadOnly = true;
             this.textOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textOutput.Size = new System.Drawing.Size(615, 341);
+            this.textOutput.Size = new System.Drawing.Size(450, 341);
             this.textOutput.TabIndex = 4;
             this.textOutput.WordWrap = false;
             // 
@@ -123,9 +127,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(633, 6);
+            this.button5.Location = new System.Drawing.Point(468, 34);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(66, 46);
+            this.button5.Size = new System.Drawing.Size(98, 46);
             this.button5.TabIndex = 11;
             this.button5.Text = "Test graphique";
             this.button5.UseVisualStyleBackColor = true;
@@ -133,9 +137,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(633, 58);
+            this.button3.Location = new System.Drawing.Point(572, 34);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 76);
+            this.button3.Size = new System.Drawing.Size(124, 46);
             this.button3.TabIndex = 12;
             this.button3.Text = "Test graphique plein écran";
             this.button3.UseVisualStyleBackColor = true;
@@ -143,24 +147,24 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(633, 161);
+            this.textBox1.Location = new System.Drawing.Point(585, 86);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(66, 20);
+            this.textBox1.Size = new System.Drawing.Size(111, 20);
             this.textBox1.TabIndex = 13;
             this.textBox1.Text = "500";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(633, 223);
+            this.textBox2.Location = new System.Drawing.Point(585, 112);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(66, 20);
+            this.textBox2.Size = new System.Drawing.Size(111, 20);
             this.textBox2.TabIndex = 14;
             this.textBox2.Text = "60";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(633, 145);
+            this.label1.Location = new System.Drawing.Point(516, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 15;
@@ -169,17 +173,55 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(636, 204);
+            this.label2.Location = new System.Drawing.Point(519, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "durée (sec)";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(585, 139);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(111, 20);
+            this.textBox3.TabIndex = 17;
+            this.textBox3.Text = "Exterieur";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(585, 166);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(111, 20);
+            this.textBox4.TabIndex = 18;
+            this.textBox4.Text = "Cage de faraday";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(519, 142);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Serie 1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(519, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Série 2";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 387);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -218,6 +260,10 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

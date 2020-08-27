@@ -313,6 +313,9 @@ namespace WindowsFormsApp1
             Chart.chartInterval = interval;
             Chart.duration = duration;
 
+            Chart.serie1Name = textBox3.Text;
+            Chart.serie2Name = textBox4.Text;
+
 
 
         }
