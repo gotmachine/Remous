@@ -168,9 +168,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(43, 130);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 13);
+            this.label11.Size = new System.Drawing.Size(47, 13);
             this.label11.TabIndex = 6;
-            this.label11.Text = "Puissance";
+            this.label11.Text = "Intensité";
             // 
             // m1TextBoxPower
             // 
@@ -310,9 +310,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(43, 130);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.Size = new System.Drawing.Size(47, 13);
             this.label14.TabIndex = 6;
-            this.label14.Text = "Puissance";
+            this.label14.Text = "Intensité";
             // 
             // m2TextBoxPower
             // 
