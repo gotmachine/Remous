@@ -239,7 +239,7 @@ namespace Remous
                 if (!Program.m1Connection.Connect(m1ComboBoxCOM.Text))
                     return;
 
-                m1ButtonTest.Text = "Test en cours...";
+                m1ButtonTest.Text = "Mesures en cours...";
                 Program.m1Connection.Enabled = true;
                 if (!m2TestingEnabled)
                 {
@@ -266,7 +266,7 @@ namespace Remous
                 if (!Program.m2Connection.Connect(m2ComboBoxCOM.Text))
                     return;
 
-                m2ButtonTest.Text = "Test en cours...";
+                m2ButtonTest.Text = "Mesures en cours...";
                 Program.m2Connection.Enabled = true;
                 if (!m1TestingEnabled)
                 {
