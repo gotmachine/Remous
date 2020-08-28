@@ -6,8 +6,10 @@ namespace Remous
 {
     public partial class Chart : Form
     {
-        DataPointCollection serie1;
-        DataPointCollection serie2;
+        DataPointCollection s1Points;
+        DataPointCollection s2Points;
+        Series s1;
+        Series s2;
         private double maxPoints;
 
         public Chart(bool hideCursor = false, bool useCurves = false, bool isM2Enabled = true)
@@ -17,11 +19,11 @@ namespace Remous
             maxPoints = Program.settings.GraphicDuration / Program.settings.GraphicInterval;
             chart1.ChartAreas[0].AxisX.ScaleView.Size = maxPoints;
 
-            serie1 = chart1.Series["Series1"].Points;
-            serie2 = chart1.Series["Series2"].Points;
+            s1 = chart1.Series["Series1"];
+            s2 = chart1.Series["Series2"];
 
-            chart1.Series["Series1"].LegendText = Program.settings.M1Title;
-            chart1.Series["Series2"].LegendText = Program.settings.M2Title;
+            s1Points = s1.Points;
+            s2Points = s2.Points;
 
             if (!useCurves)
             {
@@ -40,18 +42,20 @@ namespace Remous
             Program.OnTimerTick += AddPoints;
         }
 
-        public void AddPoints(double m1Power, double m1Frequency, double m2Power, double m2frequency)
+        public void AddPoints(double m1Power, double m1Frequency, double m2Power, double m2Frequency)
         {
             if (m1Power > 0.0)
             {
                 if (Program.settings.M1Unit != "V/m")
                     m1Power = Math.Pow(m1Power * 0.377, 0.5);
 
-                serie1.AddY(m1Power);
+                s1.LegendText = $"{Program.settings.M1Title}\nIntensité : {m1Power.ToString("0.00 V/m")}\nFrequence : {m1Frequency.ToString("0.0 Mhz")}";
+
+                s1Points.AddY(m1Power);
             }
             else
             {
-                serie1.AddY(-10.0);
+                s1Points.AddY(-10.0);
             }
 
             if (m2Power > 0.0)
@@ -59,17 +63,19 @@ namespace Remous
                 if (Program.settings.M2Unit != "V/m")
                     m2Power = Math.Pow(m2Power * 0.377, 0.5);
 
-                serie2.AddY(m2Power);
+                s2.LegendText = $"{Program.settings.M2Title}\nIntensité : {m2Power.ToString("0.00 V/m")}\nFrequence : {m2Frequency.ToString("0.0 Mhz")}";
+
+                s2Points.AddY(m2Power);
             }
             else
             {
-                serie2.AddY(-10.0);
+                s2Points.AddY(-10.0);
             }
 
-            if (serie1.Count > maxPoints)
+            if (s1Points.Count > maxPoints)
             {
-                serie1.RemoveAt(0);
-                serie2.RemoveAt(0);
+                s1Points.RemoveAt(0);
+                s2Points.RemoveAt(0);
             }
 
             AdjustGraphics();
@@ -77,22 +83,32 @@ namespace Remous
 
         private void AdjustGraphics()
         {
-            chart1.ChartAreas[0].AxisY2.Minimum = 0.0; // sets the Minimum to NaN
-            chart1.ChartAreas[0].AxisY2.Maximum = double.NaN; // sets the Minimum to NaN
-            chart1.ChartAreas[0].RecalculateAxesScale(); // recalculates the Maximum and Minimum values, since they are set to NaN
-            chart1.ChartAreas[0].AxisY.Minimum = 0.0; // sets the Minimum to NaN
+            // we want the minimum to always be 0.0
+            chart1.ChartAreas[0].AxisY2.Minimum = 0.0; 
+
+            // sets the Maximum of the right axis to NaN for RecalculateAxesScale() to do its magic
+            chart1.ChartAreas[0].AxisY2.Maximum = double.NaN; 
+            chart1.ChartAreas[0].RecalculateAxesScale();
+
+            // give us some space at the top so the legend and logo don't overlap
+            chart1.ChartAreas[0].AxisY2.Maximum *= 1.15; 
+
+            // ensure that the left axis scale match the right axis
+            chart1.ChartAreas[0].AxisY.Minimum = 0.0; 
             chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY2.Maximum; // sets the Minimum to NaN
 
+            // reposition the "Extrême" label on the left axis so it never intersect the maximum (prevent a black top border to appear)
             if (chart1.ChartAreas[0].AxisY.Maximum > 0.75)
             {
                 chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = chart1.ChartAreas[0].AxisY.Maximum;
             }
             else
             {
-                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = 10.0;
+                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = 50.0;
             }
 
-
+            // adjust the right axis intervals depending on the current scale
+            // we don't use the automatic adjustement because it tend to change too often and to create very small intervals
             if (chart1.ChartAreas[0].AxisY2.Maximum < 0.5)
             {
                 chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.02;

@@ -299,6 +299,18 @@ namespace Remous
                     m1TextBoxPower.Text = m1Power.ToString("0.000000 mW/m²");
 
                 m1TextBoxFrequency.Text = m1Frequency.ToString("0.0 Mhz");
+
+                if (FrequencyAnalyzer.AnalyzeFrequency(m1Frequency, out FrequencySource source, out Operator sourceOperator))
+                {
+                    if (sourceOperator == null)
+                        m1TextBoxFrequencySource.Text = source.name;
+                    else
+                        m1TextBoxFrequencySource.Text = $"{source.name} ({sourceOperator.name})";
+                }
+                else
+                {
+                    m1TextBoxFrequencySource.Text = "";
+                }
             }
 
             if (m2TestingEnabled)
@@ -309,6 +321,18 @@ namespace Remous
                     m2TextBoxPower.Text = m2Power.ToString("0.000000 mW/m²");
 
                 m2TextBoxFrequency.Text = m2Frequency.ToString("0.0 Mhz");
+
+                if (FrequencyAnalyzer.AnalyzeFrequency(m2Frequency, out FrequencySource source, out Operator sourceOperator))
+                {
+                    if (sourceOperator == null)
+                        m2TextBoxFrequencySource.Text = source.name;
+                    else
+                        m2TextBoxFrequencySource.Text = $"{source.name} ({sourceOperator.name})";
+                }
+                else
+                {
+                    m1TextBoxFrequencySource.Text = "";
+                }
             }
         }
 

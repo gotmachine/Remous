@@ -65,6 +65,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.graphicModeComboBox = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.m1TextBoxFrequencySource = new System.Windows.Forms.TextBox();
+            this.m2TextBoxFrequencySource = new System.Windows.Forms.TextBox();
             this.m1GroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -104,6 +106,7 @@
             // 
             // m1GroupBox
             // 
+            this.m1GroupBox.Controls.Add(this.m1TextBoxFrequencySource);
             this.m1GroupBox.Controls.Add(this.label13);
             this.m1GroupBox.Controls.Add(this.m1TextBoxFrequency);
             this.m1GroupBox.Controls.Add(this.label12);
@@ -117,7 +120,7 @@
             this.m1GroupBox.Controls.Add(this.m1ComboBoxCOM);
             this.m1GroupBox.Location = new System.Drawing.Point(12, 41);
             this.m1GroupBox.Name = "m1GroupBox";
-            this.m1GroupBox.Size = new System.Drawing.Size(285, 175);
+            this.m1GroupBox.Size = new System.Drawing.Size(285, 190);
             this.m1GroupBox.TabIndex = 21;
             this.m1GroupBox.TabStop = false;
             this.m1GroupBox.Text = "Mesureur n°1";
@@ -125,7 +128,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(185, 130);
+            this.label13.Location = new System.Drawing.Point(6, 162);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 13);
             this.label13.TabIndex = 10;
@@ -133,10 +136,10 @@
             // 
             // m1TextBoxFrequency
             // 
-            this.m1TextBoxFrequency.Location = new System.Drawing.Point(149, 146);
+            this.m1TextBoxFrequency.Location = new System.Drawing.Point(65, 159);
             this.m1TextBoxFrequency.Name = "m1TextBoxFrequency";
             this.m1TextBoxFrequency.ReadOnly = true;
-            this.m1TextBoxFrequency.Size = new System.Drawing.Size(130, 20);
+            this.m1TextBoxFrequency.Size = new System.Drawing.Size(60, 20);
             this.m1TextBoxFrequency.TabIndex = 9;
             this.m1TextBoxFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -166,7 +169,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(43, 130);
+            this.label11.Location = new System.Drawing.Point(6, 136);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 13);
             this.label11.TabIndex = 6;
@@ -174,10 +177,10 @@
             // 
             // m1TextBoxPower
             // 
-            this.m1TextBoxPower.Location = new System.Drawing.Point(6, 146);
+            this.m1TextBoxPower.Location = new System.Drawing.Point(65, 133);
             this.m1TextBoxPower.Name = "m1TextBoxPower";
             this.m1TextBoxPower.ReadOnly = true;
-            this.m1TextBoxPower.Size = new System.Drawing.Size(130, 20);
+            this.m1TextBoxPower.Size = new System.Drawing.Size(214, 20);
             this.m1TextBoxPower.TabIndex = 5;
             this.m1TextBoxPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -246,6 +249,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.m2TextBoxFrequencySource);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.m2TextBoxFrequency);
             this.groupBox1.Controls.Add(this.label8);
@@ -259,7 +263,7 @@
             this.groupBox1.Controls.Add(this.m2ComboBoxCOM);
             this.groupBox1.Location = new System.Drawing.Point(303, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(285, 175);
+            this.groupBox1.Size = new System.Drawing.Size(285, 190);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mesureur n°2";
@@ -267,7 +271,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(185, 130);
+            this.label7.Location = new System.Drawing.Point(6, 162);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 10;
@@ -275,10 +279,10 @@
             // 
             // m2TextBoxFrequency
             // 
-            this.m2TextBoxFrequency.Location = new System.Drawing.Point(149, 146);
+            this.m2TextBoxFrequency.Location = new System.Drawing.Point(65, 159);
             this.m2TextBoxFrequency.Name = "m2TextBoxFrequency";
             this.m2TextBoxFrequency.ReadOnly = true;
-            this.m2TextBoxFrequency.Size = new System.Drawing.Size(130, 20);
+            this.m2TextBoxFrequency.Size = new System.Drawing.Size(60, 20);
             this.m2TextBoxFrequency.TabIndex = 9;
             this.m2TextBoxFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -308,7 +312,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(43, 130);
+            this.label14.Location = new System.Drawing.Point(6, 136);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(47, 13);
             this.label14.TabIndex = 6;
@@ -316,10 +320,10 @@
             // 
             // m2TextBoxPower
             // 
-            this.m2TextBoxPower.Location = new System.Drawing.Point(6, 146);
+            this.m2TextBoxPower.Location = new System.Drawing.Point(65, 133);
             this.m2TextBoxPower.Name = "m2TextBoxPower";
             this.m2TextBoxPower.ReadOnly = true;
-            this.m2TextBoxPower.Size = new System.Drawing.Size(130, 20);
+            this.m2TextBoxPower.Size = new System.Drawing.Size(214, 20);
             this.m2TextBoxPower.TabIndex = 5;
             this.m2TextBoxPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -376,7 +380,7 @@
             this.groupBox2.Controls.Add(this.graphicModeComboBox);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Location = new System.Drawing.Point(12, 222);
+            this.groupBox2.Location = new System.Drawing.Point(12, 237);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(576, 81);
             this.groupBox2.TabIndex = 27;
@@ -404,6 +408,7 @@
             this.graphicDurationNumericUpDown.Name = "graphicDurationNumericUpDown";
             this.graphicDurationNumericUpDown.Size = new System.Drawing.Size(141, 20);
             this.graphicDurationNumericUpDown.TabIndex = 30;
+            this.toolTip.SetToolTip(this.graphicDurationNumericUpDown, "Determine le nombre de points affichés sur le graphique");
             this.graphicDurationNumericUpDown.Value = new decimal(new int[] {
             60,
             0,
@@ -433,6 +438,7 @@
             this.graphicIntervalNumericUpDown.Name = "graphicIntervalNumericUpDown";
             this.graphicIntervalNumericUpDown.Size = new System.Drawing.Size(141, 20);
             this.graphicIntervalNumericUpDown.TabIndex = 29;
+            this.toolTip.SetToolTip(this.graphicIntervalNumericUpDown, "Ne doit pas être inférieur à la fréquence  séléctionnée sur le mesureur");
             this.graphicIntervalNumericUpDown.Value = new decimal(new int[] {
             5,
             0,
@@ -462,20 +468,38 @@
             this.graphicModeComboBox.TabIndex = 27;
             this.graphicModeComboBox.SelectedIndexChanged += new System.EventHandler(this.graphicModeComboBox_SelectedIndexChanged);
             // 
+            // m1TextBoxFrequencySource
+            // 
+            this.m1TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
+            this.m1TextBoxFrequencySource.Name = "m1TextBoxFrequencySource";
+            this.m1TextBoxFrequencySource.ReadOnly = true;
+            this.m1TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
+            this.m1TextBoxFrequencySource.TabIndex = 11;
+            this.m1TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // m2TextBoxFrequencySource
+            // 
+            this.m2TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
+            this.m2TextBoxFrequencySource.Name = "m2TextBoxFrequencySource";
+            this.m2TextBoxFrequencySource.ReadOnly = true;
+            this.m2TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
+            this.m2TextBoxFrequencySource.TabIndex = 11;
+            this.m2TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 313);
+            this.ClientSize = new System.Drawing.Size(603, 332);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.m1GroupBox);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btnSearchComPorts);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(619, 352);
             this.MinimumSize = new System.Drawing.Size(619, 352);
             this.Name = "mainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -530,6 +554,8 @@
         private System.Windows.Forms.NumericUpDown graphicDurationNumericUpDown;
         private System.Windows.Forms.NumericUpDown graphicIntervalNumericUpDown;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.TextBox m1TextBoxFrequencySource;
+        private System.Windows.Forms.TextBox m2TextBoxFrequencySource;
     }
 }
 

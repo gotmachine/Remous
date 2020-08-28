@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Connection.cs" />
     <Compile Include="DataPoint.cs" />
+    <Compile Include="FrequencyAnalyzer.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
