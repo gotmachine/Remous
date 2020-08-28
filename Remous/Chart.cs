@@ -11,9 +11,12 @@ namespace Remous
         Series s1;
         Series s2;
         private double maxPoints;
+        mainForm mainForm;
 
-        public Chart(bool hideCursor = false, bool useCurves = false, bool isM2Enabled = true)
+        public Chart(mainForm mainForm, bool hideCursor = false, bool useCurves = false, bool isM2Enabled = true)
         {
+            this.mainForm = mainForm;
+
             InitializeComponent();
 
             maxPoints = Program.settings.GraphicDuration / Program.settings.GraphicInterval;
@@ -166,6 +169,7 @@ namespace Remous
             Program.OnTimerTick -= AddPoints;
             Program.GraphicEnabled = false;
             System.Windows.Forms.Cursor.Show();
+            mainForm.Enabled = true;
         }
     }
 }

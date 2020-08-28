@@ -498,12 +498,15 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btnSearchComPorts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(619, 352);
             this.Name = "mainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Remous";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.mainForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.m1GroupBox.ResumeLayout(false);

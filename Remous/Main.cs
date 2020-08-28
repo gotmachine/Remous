@@ -170,7 +170,7 @@ namespace Remous
 
             bool useCurve = graphicModeComboBox.Text == "Barres" ? false : true;
 
-            Chart chart = new Chart(fullscreen, useCurve, Program.m2Connection.Enabled);
+            Chart chart = new Chart(this, fullscreen, useCurve, Program.m2Connection.Enabled);
 
             if (fullscreen)
             {
@@ -184,6 +184,8 @@ namespace Remous
             {
                 SetFullScreenForm(chart);
             }
+
+            this.Enabled = false;
         }
 
         private void SetFullScreenForm(Form form)
@@ -344,6 +346,12 @@ namespace Remous
         private void m2ComboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.settings.M2Unit = m2ComboBoxUnit.Text;
+        }
+
+        private void mainForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            About about = new About();
+            about.Show();
         }
     }
 }
