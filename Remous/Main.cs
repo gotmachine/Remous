@@ -144,12 +144,30 @@ namespace Remous
 
         private void button5_Click(object sender, EventArgs e)
         {
+            ClearM1Tests();
+            ClearM2Tests();
             StartChart(false);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            ClearM1Tests();
+            ClearM2Tests();
             StartChart(true);
+        }
+
+        private void ClearM1Tests()
+        {
+            m1TextBoxPower.Text = "";
+            m1TextBoxFrequency.Text = "";
+            m1TextBoxFrequencySource.Text = "";
+        }
+
+        private void ClearM2Tests()
+        {
+            m2TextBoxPower.Text = "";
+            m2TextBoxFrequency.Text = "";
+            m2TextBoxFrequencySource.Text = "";
         }
 
         private void StartChart(bool fullscreen)
@@ -162,11 +180,11 @@ namespace Remous
 
             Program.GraphicEnabled = true;
 
-            if (Program.m1Connection.Connect(m1ComboBoxCOM.Text))
-                Program.m1Connection.Enabled = true;
+            Program.settings.M1COMPort = m1ComboBoxCOM.Text;
+            Program.settings.M2COMPort = m2ComboBoxCOM.Text;
 
-            if (Program.m2Connection.Connect(m2ComboBoxCOM.Text, false))
-                Program.m2Connection.Enabled = true;
+            Program.m1Connection.Connect(m1ComboBoxCOM.Text);
+            Program.m2Connection.Connect(m2ComboBoxCOM.Text, false);
 
             bool useCurve = graphicModeComboBox.Text == "Barres" ? false : true;
 
@@ -185,7 +203,18 @@ namespace Remous
                 SetFullScreenForm(chart);
             }
 
-            this.Enabled = false;
+
+
+            //this.Enabled = false;
+            SetInteractable(false);
+        }
+
+        public void SetInteractable(bool interactable)
+        {
+            foreach (Control child in Controls)
+            {
+                child.Enabled = interactable;
+            }
         }
 
         private void SetFullScreenForm(Form form)
@@ -230,7 +259,8 @@ namespace Remous
             if (m1TestingEnabled)
             {
                 m1ButtonTest.Text = "Tester la connexion";
-                Program.m1Connection.Enabled = false;
+                Program.m1Connection.Disconnect();
+                ClearM1Tests();
                 if (!m2TestingEnabled)
                 {
                     StopTesting();
@@ -242,7 +272,6 @@ namespace Remous
                     return;
 
                 m1ButtonTest.Text = "Mesures en cours...";
-                Program.m1Connection.Enabled = true;
                 if (!m2TestingEnabled)
                 {
                     StartTesting();
@@ -257,7 +286,8 @@ namespace Remous
             if (m2TestingEnabled)
             {
                 m2ButtonTest.Text = "Tester la connexion";
-                Program.m2Connection.Enabled = false;
+                Program.m2Connection.Disconnect();
+                ClearM2Tests();
                 if (!m1TestingEnabled)
                 {
                     StopTesting();
@@ -269,7 +299,6 @@ namespace Remous
                     return;
 
                 m2ButtonTest.Text = "Mesures en cours...";
-                Program.m2Connection.Enabled = true;
                 if (!m1TestingEnabled)
                 {
                     StartTesting();
@@ -352,6 +381,16 @@ namespace Remous
         {
             About about = new About();
             about.Show();
+        }
+
+        private void checkBoxSaveData_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.logData = checkBoxSaveData.Checked;
+        }
+
+        private void checkBoxSaveErrors_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.logErrors = checkBoxSaveErrors.Checked;
         }
     }
 }

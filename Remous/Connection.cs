@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Ports;
+using System.Threading;
 using System.Windows;
 
 namespace Remous
@@ -12,44 +13,55 @@ namespace Remous
 
         public object comLock = new object();
         private int testMode = 0;
-        private bool isValid;
-        public bool IsValid => isValid;
         private SerialPort comPort;
         private List<string> rawDataBuffer = new List<string>();
+        private DateTime lastReception;
+
+        public bool tryToReconnect;
 
         private double lastTestPower;
         
+        public bool Enabled { get; private set; }
 
-        private bool enabled;
-        public bool Enabled 
-        { 
-            get => enabled && (isValid || testMode > 0);
-            set
+        public void Disconnect()
+        {
+            tryToReconnect = false;
+
+            if (testMode > 0)
             {
-                if (testMode > 0)
+                Enabled = false;
+            }
+
+            if (comPort != null)
+            {
+                comPort.DataReceived -= OnDataReceived;
+
+                if (comPort.IsOpen)
                 {
-                    enabled = value;
+                    comPort.Close();
+                    Stopwatch closeWatch = new Stopwatch();
+                    closeWatch.Start();
+
+                    while (closeWatch.Elapsed < TimeSpan.FromSeconds(5.0))
+                    {
+                        Thread.Sleep(10);
+                        if (!comPort.IsOpen) break;
+                    }
+
+                    closeWatch.Stop();
                 }
 
-                if (isValid)
-                {
-                    try
-                    {
-                        comPort.Open();
-                        comPort.DataReceived += OnDataReceived;
-                        enabled = value;
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show($"Erreur à l'ouverture du port {comPort.PortName}\n{e.Message}");
-                    }
-                }
+                comPort.Dispose();
+                comPort = null;
             }
+
+            
+            Enabled = false;
         }
 
         public bool Connect(string portName, bool showErrors = true)
         {
-            isValid = false;
+            tryToReconnect = false;
             testMode = 0;
 
             if (string.IsNullOrEmpty(portName))
@@ -60,15 +72,19 @@ namespace Remous
 
             if (portName == "Données de test m1")
             {
+                Enabled = true;
                 testMode = 1;
                 return true;
             }
 
             if (portName == "Données de test m2")
             {
+                Enabled = true;
                 testMode = 2;
                 return true;
             }
+
+            Disconnect();
 
             comPort = new SerialPort();
             comPort.PortName = portName;
@@ -86,6 +102,12 @@ namespace Remous
             }
             catch (Exception e)
             {
+                if (Program.logErrors)
+                {
+                    Logger.Log($"Erreur à l'ouverture du port {comPort.PortName}\n{e.Message}");
+                    Logger.WriteLog();
+                }
+
                 if (showErrors) MessageBox.Show($"Erreur à l'ouverture du port {comPort.PortName}\n{e.Message}");
                 return false;
             }
@@ -93,20 +115,28 @@ namespace Remous
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            while (stopwatch.Elapsed < TimeSpan.FromSeconds(2.0))
+            while (stopwatch.Elapsed < TimeSpan.FromSeconds(5.0))
             {
+                Thread.Sleep(50);
                 try
                 {
                     rawDataBuffer.Add(comPort.ReadLine());
                     if (ProcessRawData(out double power, out double frequency))
                     {
-                        comPort.Close();
-                        isValid = true;
+                        lastReception = DateTime.Now;
+                        comPort.DataReceived += OnDataReceived;
+                        Enabled = true;
                         return true;
                     }
                 }
                 catch (TimeoutException)
                 {
+                    if (Program.logErrors)
+                    {
+                        Logger.Log($"Mesureur non trouvé sur le port {comPort.PortName}");
+                        Logger.WriteLog();
+                    }
+
                     if (showErrors) MessageBox.Show($"Mesureur non trouvé sur le port {comPort.PortName}");
                     comPort.Close();
                     return false;
@@ -117,6 +147,27 @@ namespace Remous
             return false;
         }
 
+        public bool IsReceiving()
+        {
+            if (testMode > 0)
+            {
+                return true;
+            }
+
+            if (!comPort.IsOpen)
+            {
+                Logger.Log($"{Program.settings.M2COMPort} : connexion perdue, le port COM est fermé");
+                return false;
+            }
+
+            if ((DateTime.Now - lastReception).TotalSeconds > 5.0)
+            {
+                Logger.Log($"{Program.settings.M2COMPort} : connexion perdue (timeout > 5s)");
+                return false;
+            }
+
+            return true;
+        }
 
 
         public bool ProcessRawData(out double power, out double frequency)
@@ -131,6 +182,7 @@ namespace Remous
             lock (comLock)
             {
                 data = rawDataBuffer.ToArray();
+                rawDataBuffer.Clear();
             }
 
             power = 0.0;
@@ -139,7 +191,6 @@ namespace Remous
             if (data.Length == 0)
                 return false;
 
-            int powerCount = 0;
             for (int i = 0; i < data.Length; i++)
             {
                 string line = data[i];
@@ -152,8 +203,12 @@ namespace Remous
 
                 try
                 {
-                    power += double.Parse(line.Substring(0, sepIdx));
-                    powerCount++;
+                    double newPower = double.Parse(line.Substring(0, sepIdx));
+                    if (newPower > power)
+                    {
+                        power = newPower;
+                    }
+
                     if (frequency == 0.0)
                     {
                         frequency = double.Parse(line.Substring(sepIdx + 1));
@@ -168,8 +223,6 @@ namespace Remous
             if (power == 0.0)
                 return false;
 
-            power /= powerCount;
-
             return true;
         }
 
@@ -180,10 +233,15 @@ namespace Remous
                 lock (comLock)
                 {
                     rawDataBuffer.Add(comPort.ReadLine());
+                    lastReception = DateTime.Now;
                 }
             }
-            catch
+            catch (Exception exc)
             {
+                if (Program.logErrors)
+                {
+                    Logger.Log($"Erreur lecture port COM {comPort.PortName}\n{exc.Message}");
+                }
             }
         }
 

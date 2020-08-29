@@ -118,7 +118,7 @@ namespace Remous
                 new SourceOperator(1845, 1860, Free),
                 new SourceOperator(1860, 1880, Bouygues)
             }),
-            new FrequencySource(1880, 1920, "DECT (téléphonie fixe sans fil)"),
+            new FrequencySource(1880, 1920, "DECT"),
             new FrequencySource(1920, 1980, "Mobile 3G/4G", new List<SourceOperator>()
             {
                 new SourceOperator(1920, 1935, SFR),
@@ -135,7 +135,7 @@ namespace Remous
                 new SourceOperator(2155, 2170, Orange)
             }),
             new FrequencySource(2170, 2200, "Mobile satellitaire"),
-            new FrequencySource(2400, 2484, "Wifi / Bluetooth / Domotique"),
+            new FrequencySource(2385, 2484, "Wifi"), // + bluetooth, babyphones, domotique divers. Normalement min = 2400 mais meilleure detection avec 2385
             new FrequencySource(2500, 2690, "Mobile 4G", new List<SourceOperator>()
             {
                 new SourceOperator(2500, 2515, SFR),
@@ -149,7 +149,7 @@ namespace Remous
 
             }),
             new FrequencySource(2700, 3400, "Radars S-band"),
-            new FrequencySource(3400, 3600, "DECT (téléphonie fixe sans fil)"),
+            new FrequencySource(3400, 3600, "DECT"),
             new FrequencySource(3600, 3800, "Réseau TV MMDS"),
             new FrequencySource(3800, 4200, "TV par satellite"),
             new FrequencySource(4200, 5090, "Réseaux locaux spécialisés"),

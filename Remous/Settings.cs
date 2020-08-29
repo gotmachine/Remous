@@ -11,6 +11,7 @@ namespace Remous
         public string M2Title { get; set; }
         public string M2Unit { get; set; }
         public double GraphicInterval { get; set; }
+        public double GraphicIntervalWithMargin => GraphicInterval + 0.15;
         public int GraphicDuration { get; set; }
         public string GraphicMode { get; set; }
 

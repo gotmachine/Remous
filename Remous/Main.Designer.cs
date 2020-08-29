@@ -34,6 +34,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.m1GroupBox = new System.Windows.Forms.GroupBox();
+            this.m1TextBoxFrequencySource = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.m1TextBoxFrequency = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -48,6 +49,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.m2TextBoxFrequencySource = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.m2TextBoxFrequency = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -65,8 +67,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.graphicModeComboBox = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.m1TextBoxFrequencySource = new System.Windows.Forms.TextBox();
-            this.m2TextBoxFrequencySource = new System.Windows.Forms.TextBox();
+            this.checkBoxSaveData = new System.Windows.Forms.CheckBox();
+            this.checkBoxSaveErrors = new System.Windows.Forms.CheckBox();
             this.m1GroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -124,6 +126,15 @@
             this.m1GroupBox.TabIndex = 21;
             this.m1GroupBox.TabStop = false;
             this.m1GroupBox.Text = "Mesureur n°1";
+            // 
+            // m1TextBoxFrequencySource
+            // 
+            this.m1TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
+            this.m1TextBoxFrequencySource.Name = "m1TextBoxFrequencySource";
+            this.m1TextBoxFrequencySource.ReadOnly = true;
+            this.m1TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
+            this.m1TextBoxFrequencySource.TabIndex = 11;
+            this.m1TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label13
             // 
@@ -267,6 +278,15 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mesureur n°2";
+            // 
+            // m2TextBoxFrequencySource
+            // 
+            this.m2TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
+            this.m2TextBoxFrequencySource.Name = "m2TextBoxFrequencySource";
+            this.m2TextBoxFrequencySource.ReadOnly = true;
+            this.m2TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
+            this.m2TextBoxFrequencySource.TabIndex = 11;
+            this.m2TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label7
             // 
@@ -468,29 +488,35 @@
             this.graphicModeComboBox.TabIndex = 27;
             this.graphicModeComboBox.SelectedIndexChanged += new System.EventHandler(this.graphicModeComboBox_SelectedIndexChanged);
             // 
-            // m1TextBoxFrequencySource
+            // checkBoxSaveData
             // 
-            this.m1TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
-            this.m1TextBoxFrequencySource.Name = "m1TextBoxFrequencySource";
-            this.m1TextBoxFrequencySource.ReadOnly = true;
-            this.m1TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
-            this.m1TextBoxFrequencySource.TabIndex = 11;
-            this.m1TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.checkBoxSaveData.AutoSize = true;
+            this.checkBoxSaveData.Location = new System.Drawing.Point(12, 324);
+            this.checkBoxSaveData.Name = "checkBoxSaveData";
+            this.checkBoxSaveData.Size = new System.Drawing.Size(134, 17);
+            this.checkBoxSaveData.TabIndex = 28;
+            this.checkBoxSaveData.Text = "Enregistrer les mesures";
+            this.checkBoxSaveData.UseVisualStyleBackColor = true;
+            this.checkBoxSaveData.CheckedChanged += new System.EventHandler(this.checkBoxSaveData_CheckedChanged);
             // 
-            // m2TextBoxFrequencySource
+            // checkBoxSaveErrors
             // 
-            this.m2TextBoxFrequencySource.Location = new System.Drawing.Point(131, 159);
-            this.m2TextBoxFrequencySource.Name = "m2TextBoxFrequencySource";
-            this.m2TextBoxFrequencySource.ReadOnly = true;
-            this.m2TextBoxFrequencySource.Size = new System.Drawing.Size(148, 20);
-            this.m2TextBoxFrequencySource.TabIndex = 11;
-            this.m2TextBoxFrequencySource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.checkBoxSaveErrors.AutoSize = true;
+            this.checkBoxSaveErrors.Location = new System.Drawing.Point(152, 324);
+            this.checkBoxSaveErrors.Name = "checkBoxSaveErrors";
+            this.checkBoxSaveErrors.Size = new System.Drawing.Size(127, 17);
+            this.checkBoxSaveErrors.TabIndex = 29;
+            this.checkBoxSaveErrors.Text = "Enregistrer les erreurs";
+            this.checkBoxSaveErrors.UseVisualStyleBackColor = true;
+            this.checkBoxSaveErrors.CheckedChanged += new System.EventHandler(this.checkBoxSaveErrors_CheckedChanged);
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 332);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(603, 351);
+            this.Controls.Add(this.checkBoxSaveErrors);
+            this.Controls.Add(this.checkBoxSaveData);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
@@ -518,6 +544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.graphicDurationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicIntervalNumericUpDown)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -559,6 +586,8 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox m1TextBoxFrequencySource;
         private System.Windows.Forms.TextBox m2TextBoxFrequencySource;
+        private System.Windows.Forms.CheckBox checkBoxSaveData;
+        private System.Windows.Forms.CheckBox checkBoxSaveErrors;
     }
 }
 

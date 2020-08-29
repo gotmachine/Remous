@@ -140,8 +140,8 @@
             chartArea1.AxisY.StripLines.Add(stripLine2);
             chartArea1.AxisY.StripLines.Add(stripLine3);
             chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
-            chartArea1.AxisY.Title = "SBM-2015 : Niveaux d\'exposition recomendés en zone de repos";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "SBM-2015 : Niveaux d\'exposition recommandés en zone de repos";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY.TitleForeColor = System.Drawing.Color.White;
             chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
             chartArea1.AxisY2.Interval = 0.1D;
@@ -233,24 +233,30 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Color = System.Drawing.Color.DodgerBlue;
             series1.CustomProperties = "PointWidth=1";
-            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.LabelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series1.LabelBorderWidth = 0;
             series1.LabelForeColor = System.Drawing.Color.White;
             series1.Legend = "LegendS1";
             series1.Name = "Series1";
             series1.ShadowColor = System.Drawing.Color.Empty;
             series1.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.White;
+            series1.SmartLabelStyle.Enabled = false;
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series2.BorderWidth = 5;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Color = System.Drawing.Color.YellowGreen;
             series2.CustomProperties = "PointWidth=1";
-            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series2.IsXValueIndexed = true;
+            series2.LabelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series2.LabelBorderWidth = 0;
             series2.LabelForeColor = System.Drawing.Color.White;
             series2.Legend = "LegendS2";
             series2.Name = "Series2";
             series2.SmartLabelStyle.CalloutLineColor = System.Drawing.Color.White;
+            series2.SmartLabelStyle.Enabled = false;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(800, 452);
@@ -259,8 +265,8 @@
             // 
             // Chart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.chart1);
             this.DoubleBuffered = true;
