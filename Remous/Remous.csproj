@@ -153,6 +153,7 @@
   <ItemGroup>
     <None Include="Resources\ripple.ico" />
     <None Include="Resources\256.png" />
+    <None Include="Resources\inonde-logo-noir-700px.png" />
     <Content Include="ripple.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

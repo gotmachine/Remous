@@ -73,9 +73,9 @@ namespace Remous {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap inonde_logo_noir_small {
+        internal static System.Drawing.Bitmap inonde_logo_noir_700px {
             get {
-                object obj = ResourceManager.GetObject("inonde_logo_noir_small", resourceCulture);
+                object obj = ResourceManager.GetObject("inonde_logo_noir_700px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

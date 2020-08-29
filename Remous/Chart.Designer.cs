@@ -58,7 +58,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             imageAnnotation1.AnchorAlignment = System.Drawing.ContentAlignment.TopCenter;
             imageAnnotation1.Height = 12D;
-            imageAnnotation1.Image = "C:\\Users\\Got\\source\\repos\\Remous\\Resources\\inonde-logo-noir-small.png";
             imageAnnotation1.IsSizeAlwaysRelative = false;
             imageAnnotation1.Name = "logo";
             imageAnnotation1.Width = 15D;

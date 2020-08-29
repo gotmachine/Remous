@@ -61,16 +61,16 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(254, 262);
+            this.label3.Location = new System.Drawing.Point(254, 274);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(198, 47);
+            this.label3.Size = new System.Drawing.Size(198, 54);
             this.label3.TabIndex = 3;
             this.label3.Text = "Cette application est développée dans le cadre du projet IN(O)NDÉS";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkLabel2
             // 
-            this.linkLabel2.Location = new System.Drawing.Point(256, 309);
+            this.linkLabel2.Location = new System.Drawing.Point(256, 328);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(198, 21);
             this.linkLabel2.TabIndex = 5;
@@ -90,11 +90,11 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Remous.Resources.inonde_logo_noir_small;
+            this.pictureBox1.Image = global::Remous.Resources.inonde_logo_noir_700px;
             this.pictureBox1.Location = new System.Drawing.Point(-6, 262);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(256, 81);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.Size = new System.Drawing.Size(256, 105);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 351);
+            this.ClientSize = new System.Drawing.Size(464, 372);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.linkLabel2);

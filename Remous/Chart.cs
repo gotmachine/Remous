@@ -19,6 +19,10 @@ namespace Remous
 
             InitializeComponent();
 
+            NamedImage namedImage = new NamedImage("inonde_logo_noir_700px", global::Remous.Resources.inonde_logo_noir_700px);
+            chart1.Images.Add(namedImage);
+            ((ImageAnnotation)chart1.Annotations["logo"]).Image = "inonde_logo_noir_700px";
+
             maxPoints = Program.settings.GraphicDuration / Program.settings.GraphicInterval;
             chart1.ChartAreas[0].AxisX.ScaleView.Size = maxPoints;
 
