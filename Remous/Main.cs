@@ -206,10 +206,10 @@ namespace Remous
                 SetFullScreenForm(chart);
             }
 
-
+            Visible = false;
 
             //this.Enabled = false;
-            SetInteractable(false);
+            //SetInteractable(false);
         }
 
         public void SetInteractable(bool interactable)

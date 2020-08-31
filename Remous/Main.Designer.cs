@@ -62,6 +62,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.m2ComboBoxCOM = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.graphicShowOperatorCheckBox = new System.Windows.Forms.CheckBox();
             this.graphicDurationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.graphicIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -69,7 +70,6 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.checkBoxSaveData = new System.Windows.Forms.CheckBox();
             this.checkBoxSaveErrors = new System.Windows.Forms.CheckBox();
-            this.graphicShowOperatorCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.m1GroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -410,6 +410,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Paramètres du graphique";
             // 
+            // graphicShowOperatorCheckBox
+            // 
+            this.graphicShowOperatorCheckBox.AutoSize = true;
+            this.graphicShowOperatorCheckBox.Location = new System.Drawing.Point(304, 49);
+            this.graphicShowOperatorCheckBox.Name = "graphicShowOperatorCheckBox";
+            this.graphicShowOperatorCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.graphicShowOperatorCheckBox.TabIndex = 31;
+            this.graphicShowOperatorCheckBox.Text = "Afficher les opérateurs mobile";
+            this.graphicShowOperatorCheckBox.UseVisualStyleBackColor = true;
+            this.graphicShowOperatorCheckBox.CheckedChanged += new System.EventHandler(this.graphicShowOperatorCheckBox_CheckedChanged);
+            // 
             // graphicDurationNumericUpDown
             // 
             this.graphicDurationNumericUpDown.Increment = new decimal(new int[] {
@@ -515,17 +526,6 @@
             this.checkBoxSaveErrors.UseVisualStyleBackColor = true;
             this.checkBoxSaveErrors.CheckedChanged += new System.EventHandler(this.checkBoxSaveErrors_CheckedChanged);
             // 
-            // graphicShowOperatorCheckBox
-            // 
-            this.graphicShowOperatorCheckBox.AutoSize = true;
-            this.graphicShowOperatorCheckBox.Location = new System.Drawing.Point(304, 49);
-            this.graphicShowOperatorCheckBox.Name = "graphicShowOperatorCheckBox";
-            this.graphicShowOperatorCheckBox.Size = new System.Drawing.Size(164, 17);
-            this.graphicShowOperatorCheckBox.TabIndex = 31;
-            this.graphicShowOperatorCheckBox.Text = "Afficher les opérateurs mobile";
-            this.graphicShowOperatorCheckBox.UseVisualStyleBackColor = true;
-            this.graphicShowOperatorCheckBox.CheckedChanged += new System.EventHandler(this.graphicShowOperatorCheckBox_CheckedChanged);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 41);
@@ -538,8 +538,8 @@
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 359);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBoxSaveErrors);

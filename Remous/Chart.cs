@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -259,7 +261,8 @@ namespace Remous
             Program.GraphicEnabled = false;
             System.Windows.Forms.Cursor.Show();
             //mainForm.Enabled = true;
-            mainForm.SetInteractable(true);
+            //mainForm.SetInteractable(true);
+            mainForm.Visible = true;
         }
     }
 }
