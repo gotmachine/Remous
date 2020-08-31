@@ -270,7 +270,6 @@ namespace Remous
                     power -= R.Next(0, 5) * 0.05;
                 }
                 power = Math.Max(0.014, Math.Min(max, power));
-                power = 7;
             }
             else
             {
