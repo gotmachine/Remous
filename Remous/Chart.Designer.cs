@@ -87,6 +87,7 @@
             chartArea1.AxisX.ScaleView.SmallScrollMinSize = 0D;
             chartArea1.AxisX.ScaleView.Zoomable = false;
             chartArea1.AxisX.ScrollBar.Enabled = false;
+            chartArea1.AxisY.Crossing = -0.5D;
             customLabel1.ForeColor = System.Drawing.Color.White;
             customLabel1.Text = "Bas";
             customLabel1.ToPosition = 0.06D;
@@ -114,6 +115,7 @@
             chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
             chartArea1.AxisY.Interval = 1D;
             chartArea1.AxisY.IsLabelAutoFit = false;
+            chartArea1.AxisY.IsStartedFromZero = false;
             chartArea1.AxisY.LabelAutoFitStyle = System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap;
             chartArea1.AxisY.LabelStyle.Angle = -90;
             chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,11 +125,12 @@
             chartArea1.AxisY.MajorTickMark.LineWidth = 4;
             chartArea1.AxisY.Maximum = 2D;
             chartArea1.AxisY.MaximumAutoSize = 3F;
-            chartArea1.AxisY.Minimum = 0D;
+            chartArea1.AxisY.Minimum = -0.5D;
             chartArea1.AxisY.ScrollBar.Enabled = false;
             stripLine1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             stripLine1.ForeColor = System.Drawing.Color.White;
-            stripLine1.StripWidth = 0.06D;
+            stripLine1.IntervalOffset = -0.5D;
+            stripLine1.StripWidth = 0.56D;
             stripLine1.TextAlignment = System.Drawing.StringAlignment.Near;
             stripLine1.TextLineAlignment = System.Drawing.StringAlignment.Center;
             stripLine2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
@@ -143,10 +146,12 @@
             chartArea1.AxisY.Title = "SBM-2015 : Niveaux d\'exposition recommandés en zone de repos";
             chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY.TitleForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY2.Crossing = -0.5D;
             chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
             chartArea1.AxisY2.Interval = 0.1D;
             chartArea1.AxisY2.IsLabelAutoFit = false;
             chartArea1.AxisY2.IsMarginVisible = false;
+            chartArea1.AxisY2.IsStartedFromZero = false;
             chartArea1.AxisY2.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY2.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.White;
@@ -163,7 +168,7 @@
             chartArea1.AxisY2.MajorTickMark.Size = 0.5F;
             chartArea1.AxisY2.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.AcrossAxis;
             chartArea1.AxisY2.Maximum = 2D;
-            chartArea1.AxisY2.Minimum = 0D;
+            chartArea1.AxisY2.Minimum = -0.5D;
             chartArea1.AxisY2.ScrollBar.Enabled = false;
             chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.White;
             chartArea1.BackColor = System.Drawing.Color.Black;

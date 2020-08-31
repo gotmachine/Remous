@@ -90,7 +90,7 @@ namespace Remous
                     {
                         legendText += $"\n{source.name}";
 
-                        if (sourceOperator != null)
+                        if (Program.settings.GraphicShowOperator && sourceOperator != null)
                         {
                             legendText += $" ({sourceOperator.name})";
                         }
@@ -113,7 +113,7 @@ namespace Remous
 
                             string label = "   \n"; // fix background being too small
                             label += source.name;
-                            if (sourceOperator != null)
+                            if (Program.settings.GraphicShowOperator && sourceOperator != null)
                             {
                                 label += $"\n ({ sourceOperator.name})";
                             }
@@ -141,7 +141,7 @@ namespace Remous
         private void AdjustGraphics()
         {
             // we want the minimum to always be 0.0
-            chart1.ChartAreas[0].AxisY2.Minimum = 0.0; 
+            chart1.ChartAreas[0].AxisY2.Minimum = 0.0;
 
             // sets the Maximum of the right axis to NaN for RecalculateAxesScale() to do its magic
             chart1.ChartAreas[0].AxisY2.Maximum = double.NaN; 
@@ -185,51 +185,56 @@ namespace Remous
             // we don't use the automatic adjustement because it tend to change too often and to create very small intervals
             if (chart1.ChartAreas[0].AxisY2.Maximum < 0.2)
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.00 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.01;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.01;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.01;
-                chart1.ChartAreas[0].AxisY.Interval = 0.01;
+                SetScaleInterval(0.01, "0.00 V/m");
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 0.5)
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.00 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.02;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.02;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.02;
-                chart1.ChartAreas[0].AxisY.Interval = 0.02;
+                SetScaleInterval(0.02, "0.00 V/m");
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 1.0)
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.00 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.05;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.05;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.05;
-                chart1.ChartAreas[0].AxisY.Interval = 0.05;
+                SetScaleInterval(0.05, "0.00 V/m");
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 2.0)
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.0 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.1;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.1;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.1;
-                chart1.ChartAreas[0].AxisY.Interval = 0.1;
+                SetScaleInterval(0.1, "0.0 V/m");
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 5.0)
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.0 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.2;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.2;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.2;
-                chart1.ChartAreas[0].AxisY.Interval = 0.2;
+                SetScaleInterval(0.2, "0.0 V/m", 0.15);
+            }
+            else if (chart1.ChartAreas[0].AxisY2.Maximum < 10.0)
+            {
+                SetScaleInterval(0.5, "0.0 V/m", 0.25);
             }
             else
             {
-                chart1.ChartAreas[0].AxisY2.LabelStyle.Format = "0.0 V/m";
-                chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = 0.5;
-                chart1.ChartAreas[0].AxisY2.Interval = 0.5;
-                chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = 0.5;
-                chart1.ChartAreas[0].AxisY.Interval = 0.5;
+                SetScaleInterval(1.0, "0.0 V/m", 0.5);
+            }
+        }
+
+        private void SetScaleInterval(double interval, string format, double zeroNegativeOffset = 0.0)
+        {
+            chart1.ChartAreas[0].AxisY2.LabelStyle.Format = format;
+            chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = interval;
+            chart1.ChartAreas[0].AxisY2.Interval = interval;
+            chart1.ChartAreas[0].AxisY2.MajorTickMark.Interval = interval;
+            chart1.ChartAreas[0].AxisY.Interval = interval;
+
+            chart1.ChartAreas[0].AxisY2.Minimum = -zeroNegativeOffset;
+            chart1.ChartAreas[0].AxisY.Minimum = -zeroNegativeOffset;
+            chart1.ChartAreas[0].AxisY.CustomLabels[0].FromPosition = -zeroNegativeOffset;
+
+            if (zeroNegativeOffset > 0.0)
+            {
+                chart1.ChartAreas[0].AxisY2.IntervalOffset = (interval * -2.0) + zeroNegativeOffset;
+                
+                chart1.ChartAreas[0].AxisY2.Maximum = ((Math.Ceiling(chart1.ChartAreas[0].AxisY2.Maximum / interval)) * interval) - 0.001;
+                chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY2.Maximum;
+            }
+            else
+            {
+                chart1.ChartAreas[0].AxisY2.IntervalOffset = 0.0;
             }
         }
 

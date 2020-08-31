@@ -14,6 +14,7 @@ namespace Remous
         public double GraphicIntervalWithMargin => GraphicInterval + 0.15;
         public int GraphicDuration { get; set; }
         public string GraphicMode { get; set; }
+        public bool GraphicShowOperator { get; set; }
 
         public int SerialBaudRate { get; set; } = 9600;
         public Parity SerialParity { get; set; } = Parity.None;

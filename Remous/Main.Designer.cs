@@ -69,6 +69,8 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.checkBoxSaveData = new System.Windows.Forms.CheckBox();
             this.checkBoxSaveErrors = new System.Windows.Forms.CheckBox();
+            this.graphicShowOperatorCheckBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.m1GroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,7 +82,7 @@
             // 
             this.btnSearchComPorts.Location = new System.Drawing.Point(12, 12);
             this.btnSearchComPorts.Name = "btnSearchComPorts";
-            this.btnSearchComPorts.Size = new System.Drawing.Size(188, 23);
+            this.btnSearchComPorts.Size = new System.Drawing.Size(210, 23);
             this.btnSearchComPorts.TabIndex = 5;
             this.btnSearchComPorts.Text = "Detecter les ports COM";
             this.btnSearchComPorts.UseVisualStyleBackColor = true;
@@ -88,9 +90,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(206, 12);
+            this.button5.Location = new System.Drawing.Point(230, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(188, 23);
+            this.button5.Size = new System.Drawing.Size(209, 23);
             this.button5.TabIndex = 11;
             this.button5.Text = "Ouvrir le graphique";
             this.button5.UseVisualStyleBackColor = true;
@@ -98,9 +100,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(400, 12);
+            this.button3.Location = new System.Drawing.Point(230, 41);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(188, 23);
+            this.button3.Size = new System.Drawing.Size(209, 23);
             this.button3.TabIndex = 12;
             this.button3.Text = "Ouvrir le graphique (plein écran)";
             this.button3.UseVisualStyleBackColor = true;
@@ -120,7 +122,7 @@
             this.m1GroupBox.Controls.Add(this.label6);
             this.m1GroupBox.Controls.Add(this.label5);
             this.m1GroupBox.Controls.Add(this.m1ComboBoxCOM);
-            this.m1GroupBox.Location = new System.Drawing.Point(12, 41);
+            this.m1GroupBox.Location = new System.Drawing.Point(12, 70);
             this.m1GroupBox.Name = "m1GroupBox";
             this.m1GroupBox.Size = new System.Drawing.Size(285, 190);
             this.m1GroupBox.TabIndex = 21;
@@ -272,7 +274,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.m2ComboBoxCOM);
-            this.groupBox1.Location = new System.Drawing.Point(303, 41);
+            this.groupBox1.Location = new System.Drawing.Point(303, 70);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(285, 190);
             this.groupBox1.TabIndex = 22;
@@ -394,13 +396,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.graphicShowOperatorCheckBox);
             this.groupBox2.Controls.Add(this.graphicDurationNumericUpDown);
             this.groupBox2.Controls.Add(this.graphicIntervalNumericUpDown);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.graphicModeComboBox);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Location = new System.Drawing.Point(12, 237);
+            this.groupBox2.Location = new System.Drawing.Point(12, 266);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(576, 81);
             this.groupBox2.TabIndex = 27;
@@ -491,7 +494,7 @@
             // checkBoxSaveData
             // 
             this.checkBoxSaveData.AutoSize = true;
-            this.checkBoxSaveData.Location = new System.Drawing.Point(12, 324);
+            this.checkBoxSaveData.Location = new System.Drawing.Point(454, 16);
             this.checkBoxSaveData.Name = "checkBoxSaveData";
             this.checkBoxSaveData.Size = new System.Drawing.Size(134, 17);
             this.checkBoxSaveData.TabIndex = 28;
@@ -502,7 +505,9 @@
             // checkBoxSaveErrors
             // 
             this.checkBoxSaveErrors.AutoSize = true;
-            this.checkBoxSaveErrors.Location = new System.Drawing.Point(152, 324);
+            this.checkBoxSaveErrors.Checked = true;
+            this.checkBoxSaveErrors.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSaveErrors.Location = new System.Drawing.Point(454, 45);
             this.checkBoxSaveErrors.Name = "checkBoxSaveErrors";
             this.checkBoxSaveErrors.Size = new System.Drawing.Size(127, 17);
             this.checkBoxSaveErrors.TabIndex = 29;
@@ -510,11 +515,33 @@
             this.checkBoxSaveErrors.UseVisualStyleBackColor = true;
             this.checkBoxSaveErrors.CheckedChanged += new System.EventHandler(this.checkBoxSaveErrors_CheckedChanged);
             // 
+            // graphicShowOperatorCheckBox
+            // 
+            this.graphicShowOperatorCheckBox.AutoSize = true;
+            this.graphicShowOperatorCheckBox.Location = new System.Drawing.Point(304, 49);
+            this.graphicShowOperatorCheckBox.Name = "graphicShowOperatorCheckBox";
+            this.graphicShowOperatorCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.graphicShowOperatorCheckBox.TabIndex = 31;
+            this.graphicShowOperatorCheckBox.Text = "Afficher les opérateurs mobile";
+            this.graphicShowOperatorCheckBox.UseVisualStyleBackColor = true;
+            this.graphicShowOperatorCheckBox.CheckedChanged += new System.EventHandler(this.graphicShowOperatorCheckBox_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(210, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Ouvrir le gestionnaire de périphériques";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(603, 351);
+            this.ClientSize = new System.Drawing.Size(603, 359);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBoxSaveErrors);
             this.Controls.Add(this.checkBoxSaveData);
             this.Controls.Add(this.groupBox2);
@@ -588,6 +615,8 @@
         private System.Windows.Forms.TextBox m2TextBoxFrequencySource;
         private System.Windows.Forms.CheckBox checkBoxSaveData;
         private System.Windows.Forms.CheckBox checkBoxSaveErrors;
+        private System.Windows.Forms.CheckBox graphicShowOperatorCheckBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 

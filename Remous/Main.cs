@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -52,6 +53,7 @@ namespace Remous
                     graphicIntervalNumericUpDown.Value = (decimal)Program.settings.GraphicInterval;
                     graphicDurationNumericUpDown.Value = Program.settings.GraphicDuration;
                     SelectTextInCombo(graphicModeComboBox, Program.settings.GraphicMode);
+                    graphicShowOperatorCheckBox.Checked = Program.settings.GraphicShowOperator;
                 }
                 catch
                 {
@@ -85,6 +87,7 @@ namespace Remous
             Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
             Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
             Program.settings.GraphicMode = graphicModeComboBox.Text;
+            Program.settings.GraphicShowOperator = graphicShowOperatorCheckBox.Checked;
         }
 
         private void SelectTextInCombo(ComboBox combo, string textToSelect)
@@ -391,6 +394,17 @@ namespace Remous
         private void checkBoxSaveErrors_CheckedChanged(object sender, EventArgs e)
         {
             Program.logErrors = checkBoxSaveErrors.Checked;
+        }
+
+        private void graphicShowOperatorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.settings.GraphicShowOperator = graphicShowOperatorCheckBox.Checked;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Show the device manager.
+            Process.Start("devmgmt.msc");
         }
     }
 }
