@@ -46,6 +46,7 @@
             System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn4 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chart));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -116,15 +117,19 @@
             chartArea1.AxisY.Interval = 1D;
             chartArea1.AxisY.IsLabelAutoFit = false;
             chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.LabelAutoFitStyle = System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap;
+            chartArea1.AxisY.LabelAutoFitMaxFontSize = 12;
+            chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
+            chartArea1.AxisY.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)(((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.IncreaseFont | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.DecreaseFont) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep90)));
             chartArea1.AxisY.LabelStyle.Angle = -90;
             chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea1.AxisY.LabelStyle.TruncatedLabels = true;
             chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisY.MajorTickMark.LineWidth = 4;
+            chartArea1.AxisY.MajorTickMark.LineWidth = 3;
+            chartArea1.AxisY.MajorTickMark.Size = 1.5F;
+            chartArea1.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.AcrossAxis;
             chartArea1.AxisY.Maximum = 2D;
-            chartArea1.AxisY.MaximumAutoSize = 3F;
+            chartArea1.AxisY.MaximumAutoSize = 5F;
             chartArea1.AxisY.Minimum = -0.5D;
             chartArea1.AxisY.ScrollBar.Enabled = false;
             stripLine1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
@@ -143,8 +148,8 @@
             chartArea1.AxisY.StripLines.Add(stripLine2);
             chartArea1.AxisY.StripLines.Add(stripLine3);
             chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
-            chartArea1.AxisY.Title = "SBM-2015 : Niveaux d\'exposition recommandés en zone de repos";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = " ";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY.TitleForeColor = System.Drawing.Color.White;
             chartArea1.AxisY2.Crossing = -0.5D;
             chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
@@ -267,6 +272,18 @@
             this.chart1.Size = new System.Drawing.Size(800, 452);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+            title1.DockingOffset = -3;
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.ForeColor = System.Drawing.Color.White;
+            title1.IsDockedInsideChartArea = false;
+            title1.Name = "Title1";
+            title1.Position.Auto = false;
+            title1.Position.Height = 100F;
+            title1.Position.Width = 2.8F;
+            title1.Text = "SBM-2015 : Niveaux d\'exposition recommandés en zone de repos";
+            title1.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
+            this.chart1.Titles.Add(title1);
             // 
             // Chart
             // 
