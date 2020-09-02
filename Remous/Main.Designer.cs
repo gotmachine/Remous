@@ -247,6 +247,8 @@
             this.m1ComboBoxCOM.Name = "m1ComboBoxCOM";
             this.m1ComboBoxCOM.Size = new System.Drawing.Size(214, 21);
             this.m1ComboBoxCOM.TabIndex = 0;
+            this.toolTip.SetToolTip(this.m1ComboBoxCOM, "Nom du port COM\r\nSaisir \"test1\" ou \"test2\" pour utiliser les données de test aléa" +
+        "toire");
             // 
             // label9
             // 
@@ -399,6 +401,8 @@
             this.m2ComboBoxCOM.Name = "m2ComboBoxCOM";
             this.m2ComboBoxCOM.Size = new System.Drawing.Size(214, 21);
             this.m2ComboBoxCOM.TabIndex = 0;
+            this.toolTip.SetToolTip(this.m2ComboBoxCOM, "Nom du port COM\r\nSaisir \"test1\" ou \"test2\" pour utiliser les données de test aléa" +
+        "toire");
             // 
             // groupBox2
             // 
