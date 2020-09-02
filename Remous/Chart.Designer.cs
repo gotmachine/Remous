@@ -153,7 +153,6 @@
             chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
             chartArea1.AxisY.Interval = 1D;
             chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.IsStartedFromZero = false;
             chartArea1.AxisY.LabelAutoFitMaxFontSize = 12;
             chartArea1.AxisY.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)(((((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.StaggeredLabels | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep30) 
@@ -167,7 +166,7 @@
             chartArea1.AxisY.MajorTickMark.Size = 1.5F;
             chartArea1.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.AcrossAxis;
             chartArea1.AxisY.Maximum = 20D;
-            chartArea1.AxisY.MaximumAutoSize = 10F;
+            chartArea1.AxisY.MaximumAutoSize = 15F;
             chartArea1.AxisY.Minimum = -0.5D;
             chartArea1.AxisY.ScrollBar.Enabled = false;
             stripLine1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(3)))), ((int)(((byte)(3)))));
@@ -204,7 +203,6 @@
             chartArea1.AxisY2.Interval = 1D;
             chartArea1.AxisY2.IsLabelAutoFit = false;
             chartArea1.AxisY2.IsMarginVisible = false;
-            chartArea1.AxisY2.IsStartedFromZero = false;
             chartArea1.AxisY2.LabelAutoFitMinFontSize = 10;
             chartArea1.AxisY2.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.White;
@@ -317,7 +315,7 @@
             series2.SmartLabelStyle.Enabled = false;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(1030, 731);
+            this.chart1.Size = new System.Drawing.Size(1926, 1043);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -325,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.chart1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

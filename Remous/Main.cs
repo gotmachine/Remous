@@ -140,10 +140,10 @@ namespace Remous
             if (ports.Length == 0)
             {
                 MessageBox.Show("Aucun port COM trouvé");
-                m1ComboBoxCOM.Items.Add("Données de test m1");
-                m1ComboBoxCOM.Items.Add("Données de test m2");
-                m2ComboBoxCOM.Items.Add("Données de test m1");
-                m2ComboBoxCOM.Items.Add("Données de test m2");
+                m1ComboBoxCOM.Items.Add("test1");
+                m1ComboBoxCOM.Items.Add("test2");
+                m2ComboBoxCOM.Items.Add("test1");
+                m2ComboBoxCOM.Items.Add("test2");
                 return;
             }
 

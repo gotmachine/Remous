@@ -70,14 +70,14 @@ namespace Remous
                 return false;
             }
 
-            if (portName == "Données de test m1")
+            if (portName == "test1")
             {
                 Enabled = true;
                 testMode = 1;
                 return true;
             }
 
-            if (portName == "Données de test m2")
+            if (portName == "test2")
             {
                 Enabled = true;
                 testMode = 2;

@@ -157,7 +157,7 @@ namespace Remous
         private void AdjustGraphics()
         {
             // we want the minimum to always be 0.0
-            chart1.ChartAreas[0].AxisY2.Minimum = 0.0;
+            chart1.ChartAreas[0].AxisY2.Minimum = -0.001;
 
             // sets the Maximum of the right axis to NaN for RecalculateAxesScale() to do its magic
             chart1.ChartAreas[0].AxisY2.Maximum = double.NaN; 
@@ -172,7 +172,7 @@ namespace Remous
             }
 
             // ensure that the left axis scale match the right axis
-            chart1.ChartAreas[0].AxisY.Minimum = 0.0; 
+            chart1.ChartAreas[0].AxisY.Minimum = -0.001; 
             chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY2.Maximum; // sets the Minimum to NaN
 
             // adjust the right axis intervals depending on the current scale
@@ -226,13 +226,13 @@ namespace Remous
             if (yMax > 25.0)
             {
                 clUELimit.FromPosition = yMin;
-                clUELimit.ToPosition = yMax * 0.05;
+                clUELimit.ToPosition = yMax * 0.05 * (Program.settings.GraphicLabelTextScale * 0.01);
                 clSbmLowTick.GridTicks = GridTickTypes.Gridline;
             }
             else if (yMax > 3.0)
             {
                 clUELimit.FromPosition = 0.6;
-                clUELimit.ToPosition = 0.6 + (yMax * 0.075);
+                clUELimit.ToPosition = 0.6 + (yMax * 0.075 * (Program.settings.GraphicLabelTextScale * 0.01));
                 clSbmLowTick.GridTicks = GridTickTypes.All;
             }
             else
@@ -247,10 +247,10 @@ namespace Remous
                 clSbmLowText.Text = "";
                 clSbmHighText.Text = "";
             }
-            else if (yMax > 12.0)
+            else if (yMax > 12.0 / (Program.settings.GraphicLabelTextScale * 0.01))
             {
-                clSbmLowText.Text = "Baubiologie idéal";
-                clSbmHighText.Text = "Baubiologie max";
+                clSbmLowText.Text = "Baubio. idéal";
+                clSbmHighText.Text = "Baubio. max";
             }
             else
             {
@@ -269,7 +269,7 @@ namespace Remous
 
         }
 
-        private void SetScaleInterval(double interval, string format, double zeroNegativeOffset = 0.0)
+        private void SetScaleInterval(double interval, string format, double zeroNegativeOffset = 0.001)
         {
             chart1.ChartAreas[0].AxisY2.LabelStyle.Format = format;
             chart1.ChartAreas[0].AxisY2.MajorGrid.Interval = interval;
