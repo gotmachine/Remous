@@ -248,12 +248,16 @@ namespace Remous
         private void GenerateRandomData(out double power, out double frequency)
         {
             power = lastTestPower;
-            const double max = 15.0;
+            const double max = 6;
             const double varfactor = 10.0;
 
             if (testMode == 1)
             {
-                if (power >= max)
+                if (power == 0.0)
+                {
+                    power = max * 0.75;
+                }
+                else if (power >= max)
                 {
                     power -= R.Next(0, 10) * 0.1 * varfactor;
                 }
@@ -270,6 +274,7 @@ namespace Remous
                     power -= R.Next(0, 5) * 0.05;
                 }
                 power = Math.Max(0.014, Math.Min(max, power));
+                //power = 20;
             }
             else
             {

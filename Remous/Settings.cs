@@ -15,6 +15,8 @@ namespace Remous
         public int GraphicDuration { get; set; }
         public string GraphicMode { get; set; }
         public bool GraphicShowOperator { get; set; }
+        public float GraphicTitleTextScale { get; set; }
+        public float GraphicLabelTextScale { get; set; }
 
         public int SerialBaudRate { get; set; } = 9600;
         public Parity SerialParity { get; set; } = Parity.None;

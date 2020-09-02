@@ -22,6 +22,8 @@ namespace Remous
         private static bool testingEnabled;
         private static bool graphicEnabled;
 
+        public static float dpiScale;
+
         public static bool TestingEnabled 
         { 
             get => testingEnabled; 

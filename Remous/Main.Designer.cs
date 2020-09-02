@@ -62,6 +62,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.m2ComboBoxCOM = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.graphicTitleTextScaleNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.graphicShowOperatorCheckBox = new System.Windows.Forms.CheckBox();
             this.graphicDurationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.graphicIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -71,11 +73,15 @@
             this.checkBoxSaveData = new System.Windows.Forms.CheckBox();
             this.checkBoxSaveErrors = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.graphicLabelTextScaleNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.m1GroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicTitleTextScaleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicDurationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicIntervalNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicLabelTextScaleNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSearchComPorts
@@ -396,6 +402,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.graphicLabelTextScaleNumericUpDown);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.graphicTitleTextScaleNumericUpDown);
             this.groupBox2.Controls.Add(this.graphicShowOperatorCheckBox);
             this.groupBox2.Controls.Add(this.graphicDurationNumericUpDown);
             this.groupBox2.Controls.Add(this.graphicIntervalNumericUpDown);
@@ -405,10 +415,48 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(12, 266);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(576, 81);
+            this.groupBox2.Size = new System.Drawing.Size(576, 102);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Paramètres du graphique";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Taille du texte (titre)";
+            // 
+            // graphicTitleTextScaleNumericUpDown
+            // 
+            this.graphicTitleTextScaleNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.graphicTitleTextScaleNumericUpDown.Location = new System.Drawing.Point(138, 72);
+            this.graphicTitleTextScaleNumericUpDown.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.graphicTitleTextScaleNumericUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.graphicTitleTextScaleNumericUpDown.Name = "graphicTitleTextScaleNumericUpDown";
+            this.graphicTitleTextScaleNumericUpDown.Size = new System.Drawing.Size(141, 20);
+            this.graphicTitleTextScaleNumericUpDown.TabIndex = 32;
+            this.toolTip.SetToolTip(this.graphicTitleTextScaleNumericUpDown, "Taille du texte en %");
+            this.graphicTitleTextScaleNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.graphicTitleTextScaleNumericUpDown.ValueChanged += new System.EventHandler(this.graphicTextScaleNumericUpDown_ValueChanged);
             // 
             // graphicShowOperatorCheckBox
             // 
@@ -536,11 +584,49 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(301, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "Taille du texte (label)";
+            // 
+            // graphicLabelTextScaleNumericUpDown
+            // 
+            this.graphicLabelTextScaleNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.graphicLabelTextScaleNumericUpDown.Location = new System.Drawing.Point(424, 72);
+            this.graphicLabelTextScaleNumericUpDown.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.graphicLabelTextScaleNumericUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.graphicLabelTextScaleNumericUpDown.Name = "graphicLabelTextScaleNumericUpDown";
+            this.graphicLabelTextScaleNumericUpDown.Size = new System.Drawing.Size(140, 20);
+            this.graphicLabelTextScaleNumericUpDown.TabIndex = 34;
+            this.toolTip.SetToolTip(this.graphicLabelTextScaleNumericUpDown, "Taille du texte en %");
+            this.graphicLabelTextScaleNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.graphicLabelTextScaleNumericUpDown.ValueChanged += new System.EventHandler(this.graphicLabelTextScaleNumericUpDown_ValueChanged);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 359);
+            this.ClientSize = new System.Drawing.Size(603, 380);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBoxSaveErrors);
             this.Controls.Add(this.checkBoxSaveData);
@@ -568,8 +654,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicTitleTextScaleNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicDurationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graphicIntervalNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphicLabelTextScaleNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,6 +705,10 @@
         private System.Windows.Forms.CheckBox checkBoxSaveErrors;
         private System.Windows.Forms.CheckBox graphicShowOperatorCheckBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown graphicTitleTextScaleNumericUpDown;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown graphicLabelTextScaleNumericUpDown;
     }
 }
 

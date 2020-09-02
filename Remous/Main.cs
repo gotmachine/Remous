@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -23,6 +24,23 @@ namespace Remous
 
         private void mainForm_Load(object sender, EventArgs e)
         {
+            Graphics g = this.CreateGraphics();
+            try
+            {
+                Program.dpiScale = g.DpiY / 96f;
+            }
+            catch
+            {
+                Program.dpiScale = 1f;
+            }
+            finally
+            {
+                g.Dispose();
+            }
+
+            Debug.WriteLine($"DPI : {Program.dpiScale}");
+
+
             SearchComPorts();
 
             if (File.Exists("RemousSettings.xml"))
@@ -52,6 +70,8 @@ namespace Remous
                 {
                     graphicIntervalNumericUpDown.Value = (decimal)Program.settings.GraphicInterval;
                     graphicDurationNumericUpDown.Value = Program.settings.GraphicDuration;
+                    graphicTitleTextScaleNumericUpDown.Value = (decimal)Program.settings.GraphicTitleTextScale;
+                    graphicLabelTextScaleNumericUpDown.Value = (decimal)Program.settings.GraphicLabelTextScale;
                     SelectTextInCombo(graphicModeComboBox, Program.settings.GraphicMode);
                     graphicShowOperatorCheckBox.Checked = Program.settings.GraphicShowOperator;
                 }
@@ -86,6 +106,8 @@ namespace Remous
 
             Program.settings.GraphicInterval = (double)graphicIntervalNumericUpDown.Value;
             Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
+            Program.settings.GraphicTitleTextScale = (float)graphicTitleTextScaleNumericUpDown.Value;
+            Program.settings.GraphicLabelTextScale = (float)graphicLabelTextScaleNumericUpDown.Value;
             Program.settings.GraphicMode = graphicModeComboBox.Text;
             Program.settings.GraphicShowOperator = graphicShowOperatorCheckBox.Checked;
         }
@@ -240,6 +262,16 @@ namespace Remous
         private void graphicDurationNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             Program.settings.GraphicDuration = (int)graphicDurationNumericUpDown.Value;
+        }
+
+        private void graphicTextScaleNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Program.settings.GraphicTitleTextScale = (float)graphicTitleTextScaleNumericUpDown.Value;
+        }
+
+        private void graphicLabelTextScaleNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Program.settings.GraphicLabelTextScale = (float)graphicLabelTextScaleNumericUpDown.Value;
         }
 
         private void graphicModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -406,5 +438,7 @@ namespace Remous
             // Show the device manager.
             Process.Start("devmgmt.msc");
         }
+
+
     }
 }

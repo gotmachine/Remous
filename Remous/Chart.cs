@@ -15,6 +15,18 @@ namespace Remous
         private double maxPoints;
         mainForm mainForm;
 
+        CustomLabel clSbmLowText;
+        CustomLabel clSbmLowTick;
+        CustomLabel clSbmHighText;
+        CustomLabel clSbmHighTick;
+        CustomLabel clUELimit;
+        CustomLabel cl6Limit;
+        CustomLabel cl6LimitTick;
+        CustomLabel cl12Limit;
+        CustomLabel cl12LimitTick;
+        CustomLabel cl20Limit;
+        CustomLabel cl20LimitTick;
+
         FrequencySource s1LastSource = null;
         FrequencySource s2LastSource = null;
         int lastLabelDistance = 0;
@@ -24,6 +36,8 @@ namespace Remous
             this.mainForm = mainForm;
 
             InitializeComponent();
+
+            SetTextScale();
 
             NamedImage namedImage = new NamedImage("inonde_logo_noir_700px", global::Remous.Resources.inonde_logo_noir_700px);
             chart1.Images.Add(namedImage);
@@ -161,28 +175,6 @@ namespace Remous
             chart1.ChartAreas[0].AxisY.Minimum = 0.0; 
             chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY2.Maximum; // sets the Minimum to NaN
 
-            // reposition the labels on the left axis so they are always visible and never intersect the maximum (prevent a black top border to appear)
-
-            // CustomLabels[2] -> "Fort"
-            if (chart1.ChartAreas[0].AxisY.Maximum < 0.6)
-            {
-                chart1.ChartAreas[0].AxisY.CustomLabels[2].ToPosition = chart1.ChartAreas[0].AxisY.Maximum;
-            }
-            else
-            {
-                chart1.ChartAreas[0].AxisY.CustomLabels[2].ToPosition = 0.6;
-            }
-
-            // CustomLabels[4] -> "Extreme"
-            if (chart1.ChartAreas[0].AxisY.Maximum > 0.75)
-            {
-                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = chart1.ChartAreas[0].AxisY.Maximum;
-            }
-            else
-            {
-                chart1.ChartAreas[0].AxisY.CustomLabels[4].ToPosition = 100.0;
-            }
-
             // adjust the right axis intervals depending on the current scale
             // we don't use the automatic adjustement because it tend to change too often and to create very small intervals
             if (chart1.ChartAreas[0].AxisY2.Maximum < 0.2)
@@ -199,7 +191,7 @@ namespace Remous
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 2.0)
             {
-                SetScaleInterval(0.1, "0.0 V/m");
+                SetScaleInterval(0.1, "0.0 V/m", 0.05);
             }
             else if (chart1.ChartAreas[0].AxisY2.Maximum < 5.0)
             {
@@ -213,6 +205,68 @@ namespace Remous
             {
                 SetScaleInterval(1.0, "0.0 V/m", 0.5);
             }
+
+            AdjustLabels(chart1.ChartAreas[0].AxisY.Maximum, chart1.ChartAreas[0].AxisY.Minimum);
+        }
+
+        private void AdjustLabels(double yMax, double yMin)
+        {
+            clSbmLowText = chart1.ChartAreas[0].AxisY.CustomLabels[0];
+            clSbmLowTick = chart1.ChartAreas[0].AxisY.CustomLabels[1];
+            clSbmHighText = chart1.ChartAreas[0].AxisY.CustomLabels[2];
+            clSbmHighTick = chart1.ChartAreas[0].AxisY.CustomLabels[3];
+            clUELimit = chart1.ChartAreas[0].AxisY.CustomLabels[4];
+            cl6LimitTick = chart1.ChartAreas[0].AxisY.CustomLabels[5];
+            cl6Limit = chart1.ChartAreas[0].AxisY.CustomLabels[6];
+            cl12LimitTick = chart1.ChartAreas[0].AxisY.CustomLabels[7];
+            cl12Limit = chart1.ChartAreas[0].AxisY.CustomLabels[8];
+            cl20LimitTick = chart1.ChartAreas[0].AxisY.CustomLabels[9];
+            cl20Limit = chart1.ChartAreas[0].AxisY.CustomLabels[10];
+
+            if (yMax > 25.0)
+            {
+                clUELimit.FromPosition = yMin;
+                clUELimit.ToPosition = yMax * 0.05;
+                clSbmLowTick.GridTicks = GridTickTypes.Gridline;
+            }
+            else if (yMax > 3.0)
+            {
+                clUELimit.FromPosition = 0.6;
+                clUELimit.ToPosition = 0.6 + (yMax * 0.075);
+                clSbmLowTick.GridTicks = GridTickTypes.All;
+            }
+            else
+            {
+                clUELimit.FromPosition = 0.3;
+                clUELimit.ToPosition = 0.9;
+                clSbmLowTick.GridTicks = GridTickTypes.All;
+            }
+
+            if (yMax > 25.0)
+            {
+                clSbmLowText.Text = "";
+                clSbmHighText.Text = "";
+            }
+            else if (yMax > 12.0)
+            {
+                clSbmLowText.Text = "Baubiologie idéal";
+                clSbmHighText.Text = "Baubiologie max";
+            }
+            else
+            {
+                clSbmHighText.Text = "Baubiologie\nMax";
+
+                if (yMax > 6.0)
+                {
+                    clSbmLowText.Text = "Idéal";
+                }
+                else
+                {
+                    clSbmLowText.Text = "Baubiologie\nIdéal";
+                }
+            }
+
+
         }
 
         private void SetScaleInterval(double interval, string format, double zeroNegativeOffset = 0.0)
@@ -237,6 +291,28 @@ namespace Remous
             else
             {
                 chart1.ChartAreas[0].AxisY2.IntervalOffset = 0.0;
+            }
+        }
+
+        private void SetTextScale()
+        {
+            float titleFontSize = (14f * Program.settings.GraphicTitleTextScale * 0.01f) / Program.dpiScale;
+            Font titleFont = new Font(this.Font.FontFamily, titleFontSize, FontStyle.Bold);
+
+            foreach (Legend legend in chart1.Legends)
+            {
+                legend.Font = titleFont;
+            }
+
+            float labelFontSize = (12f * Program.settings.GraphicLabelTextScale * 0.01f) / Program.dpiScale;
+            Font labelFont = new Font(this.Font.FontFamily, labelFontSize);
+
+            chart1.ChartAreas[0].AxisY.LabelStyle.Font = labelFont;
+            chart1.ChartAreas[0].AxisY2.LabelStyle.Font = labelFont;
+
+            foreach (Series series in chart1.Series)
+            {
+                series.Font = labelFont;
             }
         }
 
