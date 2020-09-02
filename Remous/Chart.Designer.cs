@@ -282,7 +282,7 @@
             legend2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 2.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chart1.Legends.Add(legend1);
             this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(-22, 0);
+            this.chart1.Location = new System.Drawing.Point(-25, 0);
             this.chart1.Name = "chart1";
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
@@ -315,7 +315,7 @@
             series2.SmartLabelStyle.Enabled = false;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(1926, 1043);
+            this.chart1.Size = new System.Drawing.Size(1030, 731);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -323,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.chart1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

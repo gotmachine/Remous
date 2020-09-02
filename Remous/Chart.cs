@@ -256,7 +256,7 @@ namespace Remous
             {
                 clSbmHighText.Text = "Baubiologie\nMax";
 
-                if (yMax > 6.0)
+                if (yMax > 6.0 / (Program.settings.GraphicLabelTextScale * 0.01))
                 {
                     clSbmLowText.Text = "Idéal";
                 }
