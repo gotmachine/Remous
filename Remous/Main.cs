@@ -203,6 +203,12 @@ namespace Remous
             if (m2TestingEnabled)
                 m2ButtonTest_Click(null, null);
 
+            if (Program.settings.M1COMPort == Program.settings.M2COMPort)
+            {
+                MessageBox.Show("Le mesureur n°1 ne peut pas être le même que le mesureur N°2\nlaissez le champ COM vide pour le mesureur N°2, ou selectionnez un autre port COM");
+                return;
+            }
+
             Program.GraphicEnabled = true;
 
             Program.settings.M1COMPort = m1ComboBoxCOM.Text;
